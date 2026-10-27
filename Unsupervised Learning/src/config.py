@@ -19,7 +19,7 @@ TRAIN_DATASET_PATH = os.path.join(DATASETS_DIR, 'triage_train.csv')
 if not os.path.exists(TRAIN_DATASET_PATH):
     TRAIN_DATASET_PATH = os.path.join(LEGACY_DATASETS_DIR, 'Training.csv')
 
-TEST_DATASET_PATH = os.path.join(LEGACY_DATASETS_DIR, 'Testing.csv')
+TEST_DATASET_PATH = os.path.join(DATASETS_DIR, 'Testing.csv')
 
 # Models Paths (unsupervised k-means clustering artifacts)
 MODELS_DIR = os.path.join(PROJECT_ROOT, 'models')
