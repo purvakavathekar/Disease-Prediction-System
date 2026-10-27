@@ -19,8 +19,16 @@ import config  # noqa: E402
 import kmeans_clustering as kc  # noqa: E402
 from train_and_evaluate import apply_clinical_noise  # noqa: E402
 
-TRAIN_CSV = os.path.join(BASE_DIR, 'datasets', 'Training.csv')
-TEST_CSV = os.path.join(BASE_DIR, 'datasets', 'Testing.csv')
+# Robust paths for Linux/Render
+_train_path = os.path.join(BASE_DIR, 'datasets', 'Training.csv')
+if not os.path.exists(_train_path):
+    _train_path = os.path.join(BASE_DIR, 'Datasets', 'Training.csv')
+TRAIN_CSV = _train_path
+
+_test_path = os.path.join(BASE_DIR, 'datasets', 'Testing.csv')
+if not os.path.exists(_test_path):
+    _test_path = os.path.join(BASE_DIR, 'Datasets', 'Testing.csv')
+TEST_CSV = _test_path
 
 
 def get_training_matrix():

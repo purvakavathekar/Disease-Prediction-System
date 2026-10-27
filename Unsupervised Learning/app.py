@@ -49,7 +49,11 @@ except Exception:
 
 # Path to datasets and models (using safe os paths)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SURVEY_CSV_PATH = os.path.join(BASE_DIR, 'datasets', 'survey.csv')
+# Robust path check for survey.csv (handles 'datasets' vs 'Datasets')
+_survey_path = os.path.join(BASE_DIR, 'datasets', 'survey.csv')
+if not os.path.exists(_survey_path):
+    _survey_path = os.path.join(BASE_DIR, 'Datasets', 'survey.csv')
+SURVEY_CSV_PATH = _survey_path
 
 # ---- K-Means clustering model (unsupervised) ----
 def get_kmeans_model():
