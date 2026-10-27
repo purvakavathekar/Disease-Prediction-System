@@ -914,3 +914,6 @@ def evaluation_dashboard():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# TEMPORARY: Force debug mode on Render
+app.debug = True
