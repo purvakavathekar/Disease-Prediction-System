@@ -691,4 +691,1077 @@
          <input type="checkbox" class="btn-check" id="btn-check-119" checked autocomplete="off">
          <label class="btn btn-primary btnCheck" for="btn-check-119">Blood in Sputum </label>
        </th>
-       <
+       <th> 
+         <input type="checkbox" class="btn-check" id="btn-check-120" checked autocomplete="off">
+         <label class="btn btn-primary btnCheck" for="btn-check-120">Prominent veins on calf</label>
+       </th>
+     </tr>
+
+
+     <tr>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-121" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-121">Palpitations</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-122" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-122">Painful Walking</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-123" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-123">Pus Filled Pimples</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-124" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-124">Blackheads</label>
+      </th>
+    </tr>
+
+  
+
+
+    <tr>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-125" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-125">Scurring</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-126" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-126">Skin peeling</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-127" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-127">Silver Like Dusting </label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-128" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-128">Small Dents in Nails</label>
+      </th>
+    </tr>
+
+  
+    <tr>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-129" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-129">Inflammatory Nails</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-130" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-130">Blisters</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-131" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-131">Red Sore Around Nose</label>
+      </th>
+      <th> 
+        <input type="checkbox" class="btn-check" id="btn-check-132" checked autocomplete="off">
+        <label class="btn btn-primary btnCheck" for="btn-check-132">Yellow Crust Ooze </label>
+      </th>
+    </tr>
+
+  
+
+  </table>
+
+  <div class="ar-submitbar">
+      <input id="submit" type="button" value="Submit symptoms" class="btn btn-outline-success btn-lg">
+      <p>Next, you can answer a few optional follow-up questions.</p>
+    </div>
+  </div>
+</section>
+
+<h3 class="report" id="report" align="center"></h3>
+
+<table class="rep table table table-bordered" id ="reportTable">
+  <tr>
+    <th id="nmLabel"></th>
+    <th id="nm"></th>
+  </tr>
+  <tr>
+    <th id="ageLabel"></th>
+    <th id="ag"></th>
+  </tr>
+  <tr>
+    <th id="gdLabel"></th>
+    <th id="gd"></th>
+  </tr>
+  <tr>
+    <th id="SympLabel"></th>
+    <th id="syp"></th>
+  </tr>
+
+  <tr>
+    <th id="DiseaseLabel"></th>
+    <th id="result"></th>
+  </tr>
+
+
+</table>
+
+
+
+
+
+<h5 align='center' margin-top="10px" id="better"></h5>
+<br>
+
+<!-- K-Means Symptom Cluster Section -->
+<div id="cluster-section" class="container mb-4 d-none">
+    <div class="card shadow-sm border-0 p-4 bg-white rounded">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 pb-2 border-bottom">
+            <div>
+                <h5 class="font-weight-bold text-dark mb-1">
+                    <i class="fas fa-project-diagram text-primary mr-2"></i>Your Symptom Cluster (K-Means)
+                </h5>
+                <p class="small text-muted mb-0">
+                    Your symptoms were grouped with the most similar records using unsupervised k-means clustering.
+                    The conditions shown are the ones recorded most often inside that cluster; they are not a diagnosis.
+                </p>
+            </div>
+            <span id="cluster-badge" class="badge badge-primary badge-pill px-3 py-2 mt-2 mt-md-0 font-weight-bold"></span>
+        </div>
+        <div id="cluster-card-body"></div>
+    </div>
+</div>
+
+
+<!-- Preventive Measures & Routine -->
+<div id="prevention-section" class="container mb-4 d-none">
+    <div class="card shadow-sm border-0 p-4 bg-white rounded">
+        <h5 class="font-weight-bold text-dark mb-1"><i class="fas fa-shield-alt text-success mr-2"></i>Preventive Measures &amp; Routine for <span id="prev-disease"></span></h5>
+        <p class="small text-muted" id="prev-summary"></p>
+        <div class="row">
+            <div class="col-md-6 mb-3"><h6 class="font-weight-bold">Preventive measures</h6><ul id="prev-measures" class="pl-3 small"></ul>
+                <h6 class="font-weight-bold mt-3 text-danger">Avoid</h6><ul id="prev-avoid" class="pl-3 small"></ul></div>
+            <div class="col-md-6 mb-3"><h6 class="font-weight-bold">Daily routine</h6><ul id="prev-daily" class="pl-3 small"></ul>
+                <h6 class="font-weight-bold mt-3">Weekly routine</h6><ul id="prev-weekly" class="pl-3 small"></ul></div>
+        </div>
+        <div class="small text-muted border-top pt-2" id="prev-disclaimer"></div>
+    </div>
+</div>
+
+<!-- Stylish Assessment Context & Action Card (Displayed After Diagnosis) -->
+<div id="assessment-summary-card" class="container mb-5 d-none">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h5 class="mb-0 font-weight-bold">
+                <i class="fas fa-notes-medical mr-2"></i> Diagnosis & Contextual Assessment Summary
+            </h5>
+        </div>
+        <div class="card-body p-4">
+            <!-- Emergency Red-Flag Warning Banner -->
+            <div id="summary-red-flag-banner" class="alert alert-danger border-danger shadow-sm d-none mb-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-ambulance fa-2x text-danger mr-3"></i>
+                    <div>
+                        <strong class="d-block text-danger font-weight-bold mb-1">EMERGENCY RED-FLAG ADVISORY</strong>
+                        <span id="summary-red-flag-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Low confidence banner removed -->
+
+            <div class="row align-items-center mb-3">
+                <div class="col-md-7">
+                    <span class="text-muted small">Primary Diagnostic Prediction:</span>
+                    <h3 class="font-weight-bold text-primary mt-1" id="summary-disease-name">Disease Name</h3>
+                    <div id="summary-symptoms-pills" class="mt-2"></div>
+                </div>
+                <div class="col-md-5 text-md-right mt-3 mt-md-0" id="summary-followup-badges">
+                    <!-- Populated with severity & progression badges -->
+                </div>
+            </div>
+
+            <!-- About This Prediction Section -->
+            <div id="about-prediction-card" class="card border bg-white p-4 mb-3 shadow-sm rounded">
+                <h5 class="font-weight-bold text-dark mb-3">
+                    <i class="fas fa-info-circle text-primary mr-2"></i> About This Prediction
+                </h5>
+                <div class="mb-2">
+                    <strong class="text-secondary">Predicted condition:</strong>
+                    <span class="font-weight-bold text-primary ml-1" id="about-predicted-condition"></span>
+                </div>
+                <div class="mb-2">
+                    <strong class="text-secondary">Selected symptoms:</strong>
+                    <span class="text-dark ml-1" id="about-selected-symptoms"></span>
+                </div>
+                <div class="mb-2">
+                    <strong class="text-secondary">Explanation:</strong>
+                    <span class="text-muted ml-1" id="about-explanation">The model generated this prediction by evaluating the submitted symptom pattern against patterns in its training data.</span>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0 small text-muted">
+                    <strong>Disclaimer:</strong> This result is for informational and educational purposes only. It cannot confirm or rule out a medical condition. Consult a qualified healthcare professional for medical advice.
+                </div>
+                <div id="about-alternatives-container" class="mt-3 pt-2 border-top small text-muted d-none">
+                    <strong>Alternative model considerations:</strong> <span id="about-alternatives-text"></span>
+                </div>
+            </div>
+
+            <!-- Follow-up Details Box -->
+            <div id="summary-followup-details" class="card bg-light border-0 p-3 mb-3 d-none">
+                <h6 class="font-weight-bold text-dark mb-2">
+                    <i class="fas fa-clipboard-check text-primary mr-1"></i> Follow-Up Assessment Context
+                </h6>
+                <div class="row small" id="summary-followup-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="medical-disclaimer py-2 px-3 small mb-3">
+                <i class="fas fa-exclamation-triangle mr-1"></i>
+                Follow-up answers and XAI feature attributions provide personal context for self-tracking and do not alter clinical diagnoses.
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center pt-2 border-top">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.reload();">
+                    <i class="fas fa-redo mr-1"></i> Start New Assessment
+                </button>
+                <div>
+                    <a href="#" class="btn btn-danger mr-2 d-none" id="btn-download-pdf" target="_blank">
+                        <i class="fas fa-file-pdf mr-1"></i> Download PDF Report
+                    </a>
+                    <a href="/timeline" class="btn btn-primary" id="btn-goto-timeline">
+                        <i class="fas fa-chart-line mr-1"></i> Track in Symptom Timeline
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include '_archive_bottom.html' %}
+
+<!-- Smart Follow-Up Modal -->
+<div class="modal fade" id="followUpModal" tabindex="-1" role="dialog" aria-labelledby="followUpModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title font-weight-bold" id="followUpModalLabel">
+                    <i class="fas fa-question-circle mr-2"></i> Smart Follow-Up Questions
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="btn-close-modal-x">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="alert alert-info py-2 px-3 small mb-3">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    To help track your condition over time, please answer these brief questions based on your selected symptoms. <strong>All questions are optional</strong> and kept separate from model diagnosis.
+                </div>
+
+                <div class="mb-3">
+                    <span class="small font-weight-bold text-muted d-block mb-1">Selected Symptoms for Evaluation:</span>
+                    <div id="modal-selected-pills" class="d-flex flex-wrap gap-1"></div>
+                </div>
+
+                <hr>
+
+                <!-- Questions Container -->
+                <div id="followup-questions-container">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <p class="text-muted mt-2">Loading relevant questions...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" id="btn-skip-followup">
+                    <i class="fas fa-forward mr-1"></i> Skip & Diagnose Directly
+                </button>
+                <button type="button" class="btn btn-primary px-4" id="btn-submit-followup">
+                    <i class="fas fa-check mr-1"></i> Submit Details & Diagnose
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function() {
+
+    // Uncheck all checkboxes on load
+    var inputElems = document.getElementsByTagName("input");
+    for (var i=0; i<inputElems.length; i++) {
+        if(inputElems[i].type=="checkbox"){
+            inputElems[i].checked=false;
+        }
+    }
+
+    const list = [];
+    var symp = ['Itching',
+ 'Skin rash',
+ 'Nodal skin eruptions',
+ 'Continuous sneezing',
+ 'Shivering',
+ 'Chills',
+ 'Joint pain',
+ 'Stomach pain',
+ 'Acidity',
+ 'Ulcers on tongue',
+ 'Muscle wasting',
+ 'Vomiting',
+ 'Burning micturition',
+ 'Spotting  urination',
+ 'Fatigue',
+ 'Weight gain',
+ 'Anxiety',
+ 'Cold hands and feets',
+ 'Mood swings',
+ 'Weight loss',
+ 'Restlessness',
+ 'Lethargy',
+ 'Patches in throat',
+ 'Irregular sugar level',
+ 'Cough',
+ 'High fever',
+ 'Sunken eyes',
+ 'Breathlessness',
+ 'Sweating',
+ 'Dehydration',
+ 'Indigestion',
+ 'Headache',
+ 'Yellowish skin',
+ 'Dark urine',
+ 'Nausea',
+ 'Loss of appetite',
+ 'Pain behind the eyes',
+ 'Back pain',
+ 'Constipation',
+ 'Abdominal pain',
+ 'Diarrhoea',
+ 'Mild fever',
+ 'Yellow urine',
+ 'Yellowing of eyes',
+ 'Acute liver failure',
+ 'Fluid overload',
+ 'Swelling of stomach',
+ 'Swelled lymph nodes',
+ 'Malaise',
+ 'Blurred and distorted vision',
+ 'Phlegm',
+ 'Throat irritation',
+ 'Redness of eyes',
+ 'Sinus pressure',
+ 'Runny nose',
+ 'Congestion',
+ 'Chest pain',
+ 'Weakness in limbs',
+ 'Fast heart rate',
+ 'Pain during bowel movements',
+ 'Pain in anal region',
+ 'Bloody stool',
+ 'Irritation in anus',
+ 'Neck pain',
+ 'Dizziness',
+ 'Cramps',
+ 'Bruising',
+ 'Obesity',
+ 'Swollen legs',
+ 'Swollen blood vessels',
+ 'Puffy face and eyes',
+ 'Enlarged thyroid',
+ 'Brittle nails',
+ 'Swollen extremeties',
+ 'Excessive hunger',
+ 'Extra marital contacts',
+ 'Drying and tingling lips',
+ 'Slurred speech',
+ 'Knee pain',
+ 'Hip joint pain',
+ 'Muscle weakness',
+ 'Stiff neck',
+ 'Swelling joints',
+ 'Movement stiffness',
+ 'Spinning movements',
+ 'Loss of balance',
+ 'Unsteadiness',
+ 'Weakness of one body side',
+ 'Loss of smell',
+ 'Bladder discomfort',
+ 'Foul smell of urine',
+ 'Continuous feel of urine',
+ 'Passage of gases',
+ 'Internal itching',
+ 'Toxic look (typhos)',
+ 'Depression',
+ 'Irritability',
+ 'Muscle pain',
+ 'Altered sensorium',
+ 'Red spots over body',
+ 'Belly pain',
+ 'Abnormal menstruation',
+ 'Dischromic  patches',
+ 'Watering from eyes',
+ 'Increased appetite',
+ 'Polyuria',
+ 'Family history',
+ 'Mucoid sputum',
+ 'Rusty sputum',
+ 'Lack of concentration',
+ 'Visual disturbances',
+ 'Receiving blood transfusion',
+ 'Receiving unsterile injections',
+ 'Coma',
+ 'Stomach bleeding',
+ 'Distention of abdomen',
+ 'History of alcohol consumption',
+ 'Fluid overload.1',
+ 'Blood in sputum',
+ 'Prominent veins on calf',
+ 'Palpitations',
+ 'Painful walking',
+ 'Pus filled pimples',
+ 'Blackheads',
+ 'Scurring',
+ 'Skin peeling',
+ 'Silver like dusting',
+ 'Small dents in nails',
+ 'Inflammatory nails',
+ 'Blister',
+ 'Red sore around nose',
+ 'Yellow crust ooze',
+ 'Prognosis'];
+
+    // Update live selected symptoms counter
+    function updateSelectedCounter() {
+        var count = 0;
+        for (var k = 0; k < 132; k++) {
+            var cb = document.getElementById('btn-check-' + (k + 1));
+            if (cb && cb.checked) count++;
+        }
+        var badge = $('#selected-counter');
+        if (count < 3) {
+            badge.removeClass('badge-success text-white').addClass('badge-warning text-dark')
+                 .html('<i class="fas fa-exclamation-triangle mr-1"></i> <span id="selected-count-number">' + count + '</span> / 3 symptoms selected (Minimum 3 required for diagnosis)');
+        } else {
+            badge.removeClass('badge-warning text-dark').addClass('badge-success text-white')
+                 .html('<i class="fas fa-check-circle mr-1"></i> <span id="selected-count-number">' + count + '</span> symptoms selected (Ready to evaluate)');
+        }
+    }
+
+    $('input.btn-check').on('change', updateSelectedCounter);
+
+    // Quick Search among 132 symptoms
+    $('#symptom-quick-search').on('input', function() {
+        var query = $(this).val().toLowerCase().trim();
+        $('table.t1 th').each(function() {
+            var label = $(this).find('label.btnCheck').text().toLowerCase();
+            if (!query) {
+                $(this).css('opacity', '1').find('label.btnCheck').removeClass('btn-warning').addClass('btn-primary');
+            } else if (label.indexOf(query) !== -1) {
+                $(this).css('opacity', '1').find('label.btnCheck').removeClass('btn-primary').addClass('btn-warning');
+            } else {
+                $(this).css('opacity', '0.35').find('label.btnCheck').removeClass('btn-warning').addClass('btn-primary');
+            }
+        });
+    });
+
+    var currentSelectedSymptoms = [];
+
+    // Main Submit button click: launches Smart Follow-Up
+    $('#submit').click(function() {
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        var gender = document.getElementById('gender').value;
+
+        // Build list and selected_symp accurately by checking all 132 checkboxes
+        currentSelectedSymptoms = [];
+        for (var k = 0; k < 132; k++) {
+            var cb = document.getElementById('btn-check-' + (k + 1));
+            if (cb && cb.checked) {
+                list[k] = 1;
+                currentSelectedSymptoms.push(symp[k]);
+            } else {
+                list[k] = 0;
+            }
+        }
+
+        // Require at least 3 symptoms to proceed
+        if (currentSelectedSymptoms.length < 3) {
+            alert('Please select at least 3 symptoms before submitting for evaluation.');
+            return;
+        }
+
+        // Render selected symptom pills in modal
+        var pillsHtml = currentSelectedSymptoms.map(function(s) {
+            return '<span class="symptom-tag bg-light text-dark border px-2 py-1">' + s + '</span>';
+        }).join(' ');
+        $('#modal-selected-pills').html(pillsHtml);
+
+        // Fetch tailored follow-up questions from backend
+        $('#followup-questions-container').html('<div class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><p class="text-muted mt-2">Loading relevant follow-up questions...</p></div>');
+        $('#followUpModal').modal('show');
+
+        $.ajax({
+            method: 'POST',
+            url: '/api/followup/questions',
+            contentType: 'application/json',
+            data: JSON.stringify({ symptoms: currentSelectedSymptoms }),
+            success: function(resp) {
+                if (resp.status === 'success' && resp.data && resp.data.questions) {
+                    renderFollowUpQuestions(resp.data.questions);
+                } else {
+                    renderDefaultQuestions();
+                }
+            },
+            error: function() {
+                // Fallback to default questions if network error
+                renderDefaultQuestions();
+            }
+        });
+    });
+
+    function renderFollowUpQuestions(questions) {
+        var container = $('#followup-questions-container');
+        var html = '';
+
+        questions.forEach(function(q) {
+            html += '<div class="followup-card mb-3 p-3 bg-light rounded border">';
+            html += '<div class="followup-question-title font-weight-bold text-dark mb-1">' + q.question + '</div>';
+            if (q.help_text) {
+                html += '<div class="followup-help-text small text-muted mb-2">' + q.help_text + '</div>';
+            }
+
+            // If the question has per-symptom choices (either per_symptom_severity or per_symptom_choice)
+            if (q.symptoms && q.symptoms.length > 0) {
+                html += '<div class="per-symptom-choice-list mt-2">';
+                q.symptoms.forEach(function(s) {
+                    var sKey = s.key;
+                    var sLabel = s.label;
+                    var isSev = (q.id === 'symptom_severities' || q.type === 'per_symptom_severity');
+
+                    html += '<div class="symptom-choice-card card mb-2 p-3 bg-white border shadow-sm">';
+                    html += '  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">';
+                    html += '    <div class="font-weight-bold text-dark mb-2 mb-md-0"><i class="fas fa-stethoscope text-primary mr-1"></i> ' + sLabel + '</div>';
+                    html += '    <div class="choice-options-group d-flex flex-wrap">';
+
+                    q.options.forEach(function(opt, optIdx) {
+                        var optVal = (typeof opt === 'object' && opt !== null) ? opt.value : opt;
+                        var optLabel = (typeof opt === 'object' && opt !== null) ? opt.label : opt;
+                        var radioId = 'q_' + q.id + '_' + sKey + '_' + (isSev ? optVal : optIdx);
+
+                        var isChecked = '';
+                        if (isSev) {
+                            if (optVal === 3 || optVal === '3') isChecked = ' checked';
+                        } else if (q.default_index !== undefined) {
+                            if (optIdx === q.default_index) isChecked = ' checked';
+                        }
+
+                        var inputClass = isSev ? 'per-symp-sev-input' : 'per-symp-choice-input';
+                        var inputName = isSev ? ('symptom_severity_' + sKey) : ('q_' + q.id + '_' + sKey);
+
+                        html += '      <div class="custom-control custom-radio custom-control-inline mr-3 my-1">';
+                        html += '        <input type="radio" id="' + radioId + '" name="' + inputName + '" value="' + optVal + '" data-qid="' + q.id + '" data-symptom="' + s.name + '" class="custom-control-input ' + inputClass + '"' + isChecked + '>';
+                        html += '        <label class="custom-control-label small cursor-pointer" for="' + radioId + '">' + optLabel + '</label>';
+                        html += '      </div>';
+                    });
+
+                    html += '    </div>';
+                    html += '  </div>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            } else if (q.type === 'rating') {
+                html += '<div class="rating-pill-group d-flex flex-wrap">';
+                q.options.forEach(function(opt) {
+                    var val = (typeof opt === 'object' && opt !== null) ? opt.value : opt;
+                    var label = (typeof opt === 'object' && opt !== null) ? opt.label : opt;
+                    var optId = 'q_' + q.id + '_' + val;
+                    var isChecked = (val === 3 || val === '3') ? ' checked' : '';
+                    html += '<div class="custom-control custom-radio custom-control-inline mr-3 mb-1">';
+                    html += '<input type="radio" id="' + optId + '" name="' + q.id + '" value="' + val + '" class="custom-control-input"' + isChecked + '>';
+                    html += '<label class="custom-control-label small" for="' + optId + '">' + label + '</label>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            } else if (q.type === 'select') {
+                html += '<select class="form-control form-control-sm" name="' + q.id + '">';
+                html += '<option value="">-- Optional: Select an answer --</option>';
+                q.options.forEach(function(opt) {
+                    var optVal = (typeof opt === 'object' && opt !== null) ? opt.value : opt;
+                    var optLabel = (typeof opt === 'object' && opt !== null) ? opt.label : opt;
+                    html += '<option value="' + optVal + '">' + optLabel + '</option>';
+                });
+                html += '</select>';
+            }
+            html += '</div>';
+        });
+
+        container.html(html);
+    }
+
+    function renderDefaultQuestions() {
+        var sympList = currentSelectedSymptoms.map(function(s) {
+            return {
+                name: s,
+                key: s.toLowerCase().replace(/ /g, '_'),
+                label: s.replace(/_/g, ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); })
+            };
+        });
+
+        var fallbackQuestions = [
+            {
+                id: 'duration',
+                type: 'per_symptom_choice',
+                question: 'When did you first notice each of your reported symptoms?',
+                help_text: 'Helps distinguish acute episodes from chronic conditions for each symptom individually.',
+                symptoms: sympList,
+                default_index: 1,
+                options: [
+                    { value: 'Less than 24 hours (Acute)', label: '< 24 Hours (Acute)' },
+                    { value: '1 to 3 days', label: '1 to 3 Days' },
+                    { value: '4 to 7 days', label: '4 to 7 Days' },
+                    { value: '1 to 2 weeks', label: '1 to 2 Weeks' },
+                    { value: 'More than 2 weeks (Persistent / Chronic)', label: '> 2 Weeks (Chronic)' }
+                ]
+            },
+            {
+                id: 'symptom_severities',
+                type: 'per_symptom_severity',
+                question: 'Please select the severity level for each of your reported symptoms:',
+                help_text: 'Rate each symptom individually to track its personal severity on your progression timeline.',
+                symptoms: sympList,
+                options: [
+                    { value: 1, label: '1 - Very Mild' },
+                    { value: 2, label: '2 - Mild' },
+                    { value: 3, label: '3 - Moderate' },
+                    { value: 4, label: '4 - Severe' },
+                    { value: 5, label: '5 - Very Severe' }
+                ]
+            },
+            {
+                id: 'frequency',
+                type: 'per_symptom_choice',
+                question: 'How frequently does each of your symptoms occur?',
+                help_text: 'Indicates whether each symptom is episodic, intermittent, or continuous.',
+                symptoms: sympList,
+                default_index: 1,
+                options: [
+                    { value: 'Occasional (Comes up rarely or once a day)', label: 'Occasional' },
+                    { value: 'Intermittent (Comes and goes in waves)', label: 'Intermittent' },
+                    { value: 'Frequent (Present most of the day)', label: 'Frequent' },
+                    { value: 'Continuous (Constant and uninterrupted)', label: 'Continuous' }
+                ]
+            },
+            {
+                id: 'progression',
+                type: 'per_symptom_choice',
+                question: 'How has the intensity of each symptom changed since it started?',
+                help_text: 'Tracks whether each symptom is resolving, steady, or escalating.',
+                symptoms: sympList,
+                default_index: 1,
+                options: [
+                    { value: 'Improving (Getting milder)', label: 'Improving' },
+                    { value: 'Unchanged (Remaining steady)', label: 'Unchanged' },
+                    { value: 'Gradually worsening', label: 'Gradually Worsening' },
+                    { value: 'Rapidly worsening', label: 'Rapidly Worsening' }
+                ]
+            }
+        ];
+        renderFollowUpQuestions(fallbackQuestions);
+    }
+
+    // Modal Action: Submit with Answers
+    $('#btn-submit-followup').click(function() {
+        var followUpAnswers = {};
+        var symptomSeverities = {};
+        var sevSum = 0;
+        var sevCount = 0;
+
+        // 1. Collect per-symptom severities
+        $('.per-symp-sev-input:checked').each(function() {
+            var sympName = $(this).data('symptom');
+            var val = parseInt($(this).val()) || 3;
+            if (sympName) {
+                symptomSeverities[sympName] = val;
+                sevSum += val;
+                sevCount++;
+            }
+        });
+
+        if (sevCount > 0) {
+            followUpAnswers['symptom_severities'] = symptomSeverities;
+            followUpAnswers['severity'] = Math.round(sevSum / sevCount);
+        }
+
+        // 2. Collect per-symptom choices for other questions (duration, frequency, progression, category questions)
+        var perQuestionSymptomMap = {};
+        $('.per-symp-choice-input:checked').each(function() {
+            var qId = $(this).data('qid');
+            var sympName = $(this).data('symptom');
+            var val = $(this).val();
+            if (qId && sympName && val) {
+                if (!perQuestionSymptomMap[qId]) perQuestionSymptomMap[qId] = {};
+                perQuestionSymptomMap[qId][sympName] = val;
+            }
+        });
+
+        for (var qId in perQuestionSymptomMap) {
+            var sMap = perQuestionSymptomMap[qId];
+            followUpAnswers['symptom_' + qId] = sMap;
+            // Also store a representative value for general compatibility
+            var firstVal = Object.values(sMap)[0];
+            if (firstVal && !followUpAnswers[qId]) {
+                followUpAnswers[qId] = firstVal;
+            }
+        }
+
+        // 3. Collect any other standard select or radio inputs
+        $('#followup-questions-container').find('select, input[type="radio"]:not(.per-symp-sev-input):not(.per-symp-choice-input):checked').each(function() {
+            var name = $(this).attr('name');
+            var val = $(this).val();
+            if (name && val && !followUpAnswers[name]) {
+                followUpAnswers[name] = val;
+            }
+        });
+
+        $('#followUpModal').modal('hide');
+        executeDiagnosis(followUpAnswers);
+    });
+
+    // Modal Action: Skip Follow-Up Questions (assigns default Moderate for each symptom)
+    $('#btn-skip-followup').click(function() {
+        $('#followUpModal').modal('hide');
+        var defaultSeverities = {};
+        var defaultDurations = {};
+        var defaultFrequencies = {};
+        var defaultProgressions = {};
+        currentSelectedSymptoms.forEach(function(s) {
+            defaultSeverities[s] = 3;
+            defaultDurations[s] = '1 to 3 days';
+            defaultFrequencies[s] = 'Intermittent (Comes and goes in waves)';
+            defaultProgressions[s] = 'Unchanged (Remaining steady)';
+        });
+        executeDiagnosis({
+            severity: 3,
+            duration: '1 to 3 days',
+            frequency: 'Intermittent (Comes and goes in waves)',
+            progression: 'Unchanged (Remaining steady)',
+            symptom_severities: defaultSeverities,
+            symptom_durations: defaultDurations,
+            symptom_frequencies: defaultFrequencies,
+            symptom_progressions: defaultProgressions
+        });
+    });
+
+    $('#btn-close-modal-x').click(function() {
+        $('#followUpModal').modal('hide');
+    });
+
+    // ---- K-Means cluster card ----
+    function escapeHtml(t) {
+        return String(t).replace(/[&<>"']/g, function(c) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+        });
+    }
+    function prettySymptom(name) {
+        return String(name).replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function renderPreventivePlan(resp) {
+        var p = resp && resp.preventive_plan;
+        if (!p) { $('#prevention-section').addClass('d-none'); return; }
+        function fill(id, arr) { $(id).html((arr || []).map(function(x){ return '<li>' + escapeHtml(x) + '</li>'; }).join('')); }
+        $('#prev-disease').text(p.disease);
+        $('#prev-summary').text(p.summary);
+        fill('#prev-measures', p.measures); fill('#prev-avoid', p.avoid);
+        fill('#prev-daily', p.daily); fill('#prev-weekly', p.weekly);
+        $('#prev-disclaimer').text(p.disclaimer);
+        $('#prevention-section').removeClass('d-none');
+    }
+
+    function renderClusterCard(resp) {
+        var c = resp && resp.cluster;
+        if (!c) { $('#cluster-section').addClass('d-none'); return; }
+
+        $('#cluster-badge').text('Cluster #' + c.cluster_id + ' \u2022 ' + c.cluster_size + ' similar records');
+
+        var html = '<div class="row">';
+
+        // Characteristic symptoms of the cluster
+        html += '<div class="col-md-6 mb-3"><h6 class="font-weight-bold">Characteristic symptoms of this cluster</h6>';
+        (c.cluster_symptoms || []).forEach(function(s) {
+            var pct = Math.round(s.prevalence * 100);
+            var matched = (c.matched_symptoms || []).indexOf(s.symptom) !== -1;
+            html += '<div class="mb-2"><div class="d-flex justify-content-between small">' +
+                    '<span>' + escapeHtml(prettySymptom(s.symptom)) + (matched ? ' <span class="badge badge-success">you reported</span>' : '') + '</span>' +
+                    '<span class="text-muted">' + pct + '% of members</span></div>' +
+                    '<div class="progress" style="height:6px;"><div class="progress-bar ' + (matched ? 'bg-success' : 'bg-secondary') + '" style="width:' + pct + '%"></div></div></div>';
+        });
+        html += '</div>';
+
+        // Conditions associated with nearby clusters
+        html += '<div class="col-md-6 mb-3"><h6 class="font-weight-bold">Conditions recorded in nearby clusters</h6>';
+        (resp.top_3_diseases || []).forEach(function(d, i) {
+            html += '<div class="d-flex justify-content-between align-items-center p-2 mb-2 rounded border ' + (i === 0 ? 'bg-light' : '') + '">' +
+                    '<span class="' + (i === 0 ? 'font-weight-bold text-primary' : '') + '">' + escapeHtml(d.disease) + '</span>' +
+                    '<span class="badge badge-pill ' + (i === 0 ? 'badge-primary' : 'badge-light border') + '">' + d.probability + '%</span></div>';
+        });
+        html += '<div class="small text-muted mt-2">Distance to centroid: <strong>' + c.distance + '</strong> &bull; ' +
+                'Cluster membership strength: <strong>' + c.membership + '%</strong></div>';
+
+        if (c.nearest_clusters && c.nearest_clusters.length > 1) {
+            html += '<div class="small text-muted mt-2"><strong>Nearest clusters:</strong> ' +
+                    c.nearest_clusters.map(function(n) {
+                        return '#' + n.cluster_id + ' (' + escapeHtml(n.dominant_condition || 'n/a') + ')';
+                    }).join(', ') + '</div>';
+        }
+        html += '</div></div>';
+
+        $('#cluster-card-body').html(html);
+        $('#cluster-section').removeClass('d-none');
+    }
+
+    // Execute Diagnosis & Save Assessment History
+    function executeDiagnosis(followUpAnswers) {
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        var gender = document.getElementById('gender').value;
+
+        $("#result").html('<span class="text-muted"><i class="fas fa-spinner fa-spin mr-1"></i>Grouping your symptoms with k-means clustering...</span>');
+        var insert = list.toString();
+        var insert_string = 'checkboxvalue=' + encodeURIComponent(insert);
+
+        $.ajax({
+            method: "POST",
+            url: "/diagnose",
+            data: insert_string,
+            cache: false,
+            success: function(resp) {
+                var isObj = (typeof resp === 'object' && resp !== null);
+                var primaryDisease = isObj ? (resp.predicted_disease || 'Undetermined') : resp;
+                var top3 = (isObj && resp.top_3_diseases) ? resp.top_3_diseases : [{ disease: primaryDisease, probability: 100.0 }];
+                var hasRedFlag = isObj ? Boolean(resp.has_red_flag) : false;
+                var redFlagMsg = isObj ? resp.red_flag_note : null;
+                var usedModelId   = isObj ? (resp.model_id   || 'kmeans')  : 'kmeans';
+                var usedModelName = isObj ? (resp.model_name || 'K-Means Clustering') : 'K-Means Clustering';
+
+                window.lastDiagnosisResult = resp;
+                window.lastFollowUpAnswers = followUpAnswers;
+
+                $('#report').html('Diagnostic Assessment Report');
+                var tbl = document.getElementById('reportTable').style;
+                tbl.display = 'table';
+                tbl.className = 'table table-bordered shadow-sm bg-white';
+
+                $('#nmLabel').html("Patient Name");
+                $('#nm').html(name || 'Anonymous');
+                $('#ageLabel').html("Age");
+                $('#ag').html(age || 'N/A');
+                $('#gdLabel').html("Gender");
+                $('#gd').html(gender || 'N/A');
+                $('#SympLabel').html("Reported Symptoms (" + currentSelectedSymptoms.length + ")");
+
+                // Render reported symptoms with individual severity tags
+                var sevLabels = {1:'Very Mild', 2:'Mild', 3:'Moderate', 4:'Severe', 5:'Very Severe'};
+                var sympDisplayHtml = currentSelectedSymptoms.map(function(s) {
+                    var sevNum = (followUpAnswers && followUpAnswers.symptom_severities) ? followUpAnswers.symptom_severities[s] : null;
+                    var badge = '';
+                    if (sevNum) {
+                        var bClass = sevNum <= 2 ? 'badge-info' : (sevNum === 3 ? 'badge-primary' : 'badge-danger');
+                        badge = ' <span class="badge ' + bClass + '">' + (sevLabels[sevNum] || ('Severity ' + sevNum + '/5')) + '</span>';
+                    }
+                    return '<span class="mr-2 mb-1 d-inline-block"><strong>' + s + '</strong>' + badge + '</span>';
+                }).join(' ');
+                $('#syp').html(sympDisplayHtml);
+
+                $('#DiseaseLabel').html('Most Associated Condition <span class="badge badge-primary ml-2 font-weight-normal"><i class="fas fa-project-diagram mr-1"></i>K-Means Cluster</span>');
+                var clusterInfo = (isObj && resp.cluster) ? resp.cluster : null;
+                var predHtml = '<div class="h4 font-weight-bold text-primary mb-1">' + primaryDisease + '</div>';
+                predHtml += '<div class="mb-2">';
+                predHtml += '  <span class="badge badge-pill badge-light border mr-1"><i class="fas fa-project-diagram mr-1"></i>' + usedModelName + '</span>';
+                if (clusterInfo) {
+                    predHtml += '  <span class="badge badge-pill badge-primary mr-1">Cluster #' + clusterInfo.cluster_id + '</span>';
+                }
+                predHtml += '</div>';
+                var altDiseases = [];
+                if (resp && resp.alternative_conditions && resp.alternative_conditions.length > 0) {
+                    altDiseases = resp.alternative_conditions;
+                } else if (top3 && top3.length > 1) {
+                    altDiseases = top3.slice(1).map(function(t) { return t.disease; }).filter(function(d) { return d !== primaryDisease; });
+                }
+                if (altDiseases.length > 0) {
+                    predHtml += '<div class="small text-muted mt-2"><strong>Alternative considerations:</strong> ' + altDiseases.join(', ') + '</div>';
+                }
+                $('#result').html(predHtml);
+
+                // Build warning notices (Red Flag Emergency Advisory)
+                var alertNotesHtml = '';
+                if (hasRedFlag && redFlagMsg) {
+                    alertNotesHtml += '<div class="alert alert-danger border-danger shadow-sm my-3 text-left"><i class="fas fa-ambulance fa-lg mr-2"></i><strong>' + redFlagMsg + '</strong></div>';
+                }
+                $("#better").html(alertNotesHtml || '<span class="text-success font-weight-bold"><i class="fas fa-check-circle mr-1"></i> We hope you get well soon!</span>');
+
+                // Render the k-means cluster card
+                renderClusterCard(resp);
+                renderPreventivePlan(resp);
+
+                // Save assessment to SQLite database for History, Timeline, and XAI
+                $.ajax({
+                    method: "POST",
+                    url: "/api/assessment/save",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        name: name,
+                        age: age,
+                        gender: gender,
+                        symptoms: currentSelectedSymptoms,
+                        symptom_vector: list,
+                        predicted_disease: primaryDisease,
+                        top_3_diseases: top3,
+                        red_flag_note: redFlagMsg,
+                        symptom_severities: followUpAnswers.symptom_severities || {},
+                        follow_up: followUpAnswers,
+                        model_id: usedModelId,
+                        model_name: usedModelName
+                    }),
+                    success: function(saveResp) {
+                        var asmtId = (saveResp && saveResp.assessment) ? saveResp.assessment.id : null;
+                        var xai = (saveResp && saveResp.explainability) ? saveResp.explainability : null;
+                        displaySummaryCard(primaryDisease, currentSelectedSymptoms, followUpAnswers, asmtId, xai, top3, hasRedFlag, redFlagMsg, usedModelName);
+                    },
+                    error: function() {
+                        displaySummaryCard(primaryDisease, currentSelectedSymptoms, followUpAnswers, null, null, top3, hasRedFlag, redFlagMsg, usedModelName);
+                    }
+                });
+            },
+            error: function(xhr) {
+                var errMsg = "Failed to run diagnostic evaluation.";
+                if (xhr && xhr.responseJSON && xhr.responseJSON.message) {
+                    errMsg = xhr.responseJSON.message;
+                } else if (xhr && xhr.status === 0) {
+                    errMsg = "Network error or server timeout. Render's free tier might be sleeping. Please wait 50 seconds and try again.";
+                } else if (xhr && xhr.responseText) {
+                    errMsg = "Server Error: " + xhr.responseText.substring(0, 200);
+                }
+                
+                alert(errMsg);
+                $("#result").html('<span class="text-danger font-weight-bold">' + errMsg + '</span>');
+            }
+        });
+    }
+
+    function displaySummaryCard(disease, symptoms, followUp, asmtId, xai, top3, hasRedFlag, redFlagMsg, modelName) {
+        modelName  = modelName  || 'ML Model';
+        $('#summary-disease-name').text(disease);
+
+        // Emergency Red-Flag banner
+        if (hasRedFlag && redFlagMsg) {
+            $('#summary-red-flag-text').text(redFlagMsg);
+            $('#summary-red-flag-banner').removeClass('d-none');
+        } else {
+            $('#summary-red-flag-banner').addClass('d-none');
+        }
+
+        // Reported symptoms pills with individual severities
+        var sevMap = (followUp && followUp.symptom_severities) ? followUp.symptom_severities : {};
+        var sevTextLabels = {1:'Very Mild', 2:'Mild', 3:'Moderate', 4:'Severe', 5:'Very Severe'};
+        var pillsHtml = symptoms.slice(0, 10).map(function(s) {
+            var sevVal = sevMap[s];
+            var sevStr = sevVal ? (' [' + (sevTextLabels[sevVal] || ('Sev ' + sevVal + '/5')) + ']') : '';
+            return '<span class="symptom-tag bg-light text-dark border">' + s + '<b>' + sevStr + '</b></span>';
+        }).join(' ');
+        if (symptoms.length > 10) {
+            pillsHtml += '<span class="badge badge-secondary ml-1">+' + (symptoms.length - 10) + ' more</span>';
+        }
+        $('#summary-symptoms-pills').html(pillsHtml);
+
+        // Badges in header — model badge + severity/progression
+        var badgesHtml = '';
+        if (modelName) {
+            badgesHtml += '<span class="badge badge-pill badge-light border mr-1"><i class="fas fa-robot mr-1"></i>' + modelName + '</span>';
+        }
+        if (followUp && followUp.severity) {
+            var sevNum = parseInt(String(followUp.severity).charAt(0)) || 3;
+            badgesHtml += '<span class="severity-badge severity-' + sevNum + ' mr-1"><i class="fas fa-tachometer-alt"></i> Avg Severity ' + sevNum + '/5</span>';
+        }
+        if (followUp && followUp.progression) {
+            var progClass = followUp.progression.toLowerCase().indexOf('improving') !== -1 ? 'status-improving' :
+                            followUp.progression.toLowerCase().indexOf('worsening') !== -1 ? 'status-worsening' : 'status-unchanged';
+            badgesHtml += '<span class="status-badge ' + progClass + '"><i class="fas fa-chart-line"></i> ' + followUp.progression + '</span>';
+        }
+        $('#summary-followup-badges').html(badgesHtml);
+
+        // About This Prediction Section
+        $('#about-predicted-condition').text(disease);
+        $('#about-selected-symptoms').text(symptoms && symptoms.length > 0 ? symptoms.join(', ') : 'None selected');
+        var explanationText = 'The model (' + modelName + ') generated this prediction by evaluating the submitted symptom pattern against patterns in its training data.';
+        // Remove any old confidence bar if present
+        var oldBar = document.getElementById('about-conf-bar-wrap');
+        if (oldBar) oldBar.remove();
+        $('#about-explanation').text(explanationText);
+
+        var alts = (xai && xai.alternative_conditions) ? xai.alternative_conditions : [];
+        if (!alts || alts.length === 0) {
+            if (top3 && top3.length > 1) {
+                alts = top3.slice(1).map(function(t) { return t.disease; }).filter(function(d) { return d !== disease; });
+            }
+        }
+        if (alts && alts.length > 0) {
+            $('#about-alternatives-text').text(alts.join(', '));
+            $('#about-alternatives-container').removeClass('d-none');
+        } else {
+            $('#about-alternatives-container').addClass('d-none');
+        }
+        $('#about-prediction-card').removeClass('d-none');
+
+        // PDF Download button
+        if (asmtId) {
+            $('#btn-download-pdf').attr('href', '/api/assessment/' + encodeURIComponent(asmtId) + '/pdf').removeClass('d-none');
+        } else {
+            $('#btn-download-pdf').addClass('d-none');
+        }
+
+        // Follow-up grid details
+        if (followUp && Object.keys(followUp).length > 0) {
+            var gridHtml = '';
+            for (var k in followUp) {
+                if (k === 'symptom_severities') {
+                    var sevObj = followUp[k];
+                    var sevListStr = Object.keys(sevObj).map(function(sn){ return sn + ': ' + (sevTextLabels[sevObj[sn]] || sevObj[sn]); }).join(', ');
+                    gridHtml += '<div class="col-12 mb-1"><strong>Individual Symptom Severities:</strong> ' + sevListStr + '</div>';
+                } else if (k.indexOf('symptom_') === 0) {
+                    var subObj = followUp[k];
+                    if (typeof subObj === 'object' && subObj !== null) {
+                        var qTitle = k.replace('symptom_', '').replace(/_/g, ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+                        var subListStr = Object.keys(subObj).map(function(sn){ return sn + ': ' + subObj[sn]; }).join(' | ');
+                        gridHtml += '<div class="col-12 mb-1"><strong>Individual ' + qTitle + ':</strong> ' + subListStr + '</div>';
+                    }
+                } else if (k !== 'top_3_diseases' && k !== 'low_confidence_warning' && k !== 'red_flag_note') {
+                    if (typeof followUp[k] !== 'object') {
+                        var label = k.replace(/_/g, ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+                        gridHtml += '<div class="col-sm-6 mb-1"><strong>' + label + ':</strong> ' + followUp[k] + '</div>';
+                    }
+                }
+            }
+            $('#summary-followup-grid').html(gridHtml);
+            $('#summary-followup-details').removeClass('d-none');
+        } else {
+            $('#summary-followup-details').addClass('d-none');
+        }
+
+        // Timeline link
+        if (asmtId) {
+            $('#btn-goto-timeline').attr('href', '/timeline?assessment=' + encodeURIComponent(asmtId));
+        } else {
+            $('#btn-goto-timeline').attr('href', '/timeline');
+        }
+
+        $('#assessment-summary-card').removeClass('d-none');
+
+        // Smooth scroll to results
+        $('html, body').animate({
+            scrollTop: $("#report").offset().top - 40
+        }, 500);
+    }
+
+});
+</script>
+
+</body>
+</html>
