@@ -295,7 +295,18 @@ def diagnose():
                 if clean_s in lookup and clean_s not in seen:
                     seen.add(clean_s)
                     test_list[lookup[clean_s]] = 1
+        
 
+        # ADD THIS NEW BLOCK
+        if test_list is None and 'checkboxvalue' in request.form:
+            insert = request.form.get('checkboxvalue', '')
+            if insert:
+                try:
+                    test_list = [int(i.strip()) for i in insert.split(',') if i.strip()]
+                except ValueError:
+                    test_list = []
+
+        # This is your existing code below it
         if test_list is None:
             insert = request.form.get('checkboxvalue', '')
             if not insert and request.is_json:
