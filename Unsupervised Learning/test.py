@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'src'))
 import kmeans_clustering as kc  # noqa: E402
 
 model, profiles, features = kc.load_artifacts()
-file = pd.read_csv(os.path.join(BASE_DIR, 'datasets', 'Testing.csv'))
+file = pd.read_csv(os.path.join(BASE_DIR, 'Datasets', 'Testing.csv'))
 
 x_test = file[features].values
 y_test = file['prognosis'].astype(str).str.strip().values

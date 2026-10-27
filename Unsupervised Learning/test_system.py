@@ -448,7 +448,7 @@ class TestDiseasePredictionSystem(unittest.TestCase):
             self.assertTrue(plan[k])
         self.assertEqual(plan['disease'], data['predicted_disease'])
         import preventive_measures, pandas as pd
-        for d in pd.read_csv('datasets/Training.csv').prognosis.unique():
+        for d in pd.read_csv('Datasets/Training.csv').prognosis.unique():
             self.assertNotEqual(preventive_measures.get_preventive_plan(d)['summary'], preventive_measures._DEFAULT['summary'])
 
     # ----------------------------------------------------

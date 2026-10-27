@@ -7,7 +7,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import symptoms_data
 import explainability
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'disease_history.db')
+# Set DATABASE_PATH (e.g. /var/data/disease_history.db on a Render persistent disk) to keep data across deploys.
+DB_PATH = os.environ.get('DATABASE_PATH') or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'disease_history.db')
+_db_dir = os.path.dirname(DB_PATH)
+if _db_dir:
+    os.makedirs(_db_dir, exist_ok=True)
 
 def get_db_connection():
     """Returns a SQLite connection with row factory configured."""

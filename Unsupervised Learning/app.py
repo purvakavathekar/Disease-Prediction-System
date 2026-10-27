@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 from functools import wraps
 import json, csv, os, io, sys
 from datetime import datetime
+from werkzeug.middleware.proxy_fix import ProxyFix
 import numpy as np
 import pandas as pd
 
@@ -28,6 +29,18 @@ except ImportError:
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'disease-prediction-secret-key-2026-secure')
 
+# Render (and most hosts) terminate HTTPS at a proxy: trust X-Forwarded-* headers so
+# url_for / redirects / secure cookies behave correctly.
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+IS_PRODUCTION = bool(os.environ.get('RENDER')) or os.environ.get('FLASK_ENV') == 'production'
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+    SESSION_COOKIE_SECURE=IS_PRODUCTION,   # cookie only over HTTPS on Render
+    SESSION_PERMANENT=False,               # login ends when the browser is closed
+)
+
 # High-risk / emergency red flag symptoms mapping
 CRITICAL_RED_FLAGS = {
     'chest_pain': 'Chest Pain',
@@ -40,12 +53,6 @@ CRITICAL_RED_FLAGS = {
     'weakness_of_one_body_side': 'Weakness of One Body Side',
     'loss_of_balance': 'Loss of Balance'
 }
-
-try:
-    from flask_mysqldb import MySQL
-    mysql = MySQL(app)
-except Exception:
-    mysql = None
 
 # Path to datasets and models (using safe os paths)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -72,22 +79,54 @@ def get_feature_names():
 # Ensure database tables and indexes exist
 database.init_db()
 
+def _wants_json():
+    """True for AJAX / API calls, which must get JSON (401) instead of an HTML redirect."""
+    return (
+        request.is_json
+        or request.path.startswith('/api/')
+        or request.method != 'GET'
+        or request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    )
+
+
 def login_required(f):
     """
     Decorator enforcing that a user must be authenticated before accessing
     disease prediction, history, timeline, or personal health records.
+    A session whose user no longer exists in the database is treated as logged out.
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not session.get('user_id'):
-            # Return 401 for API/AJAX requests
-            if request.is_json or request.path.startswith('/api/') or request.method == 'POST':
-                return jsonify({'status': 'error', 'message': 'Authentication required. Please sign in.'}), 401
-            # Flash message and redirect HTML page visits to login with next parameter
+        user_id = session.get('user_id')
+        if user_id and not database.get_user_by_id(user_id):
+            session.clear()          # stale cookie (e.g. database was reset on redeploy)
+            user_id = None
+        if not user_id:
+            if _wants_json():
+                return jsonify({
+                    'status': 'error',
+                    'message': 'Authentication required. Please sign in.',
+                    'login_url': url_for('login')
+                }), 401
             flash('Please log in to access this page.', 'warning')
             return redirect(url_for('login', next=request.path))
         return f(*args, **kwargs)
     return decorated_function
+
+
+@app.after_request
+def add_no_cache_headers(response):
+    """Stop browsers caching signed-in pages, so Back/refresh never shows the app without a login."""
+    if request.endpoint not in ('static', 'static_css_fallback', 'serve_report_file'):
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+    return response
+
+
+@app.route('/healthz')
+def healthz():
+    """Lightweight health check for Render (does not touch the model or database)."""
+    return jsonify({'status': 'ok'})
 
 
 @app.context_processor
@@ -150,6 +189,11 @@ def register():
 def login():
     """Authenticates existing users and starts a secure session."""
     next_url = request.args.get('next') or '/'
+    if not next_url.startswith('/') or next_url.startswith('//'):
+        next_url = '/'
+
+    if request.method == 'GET' and session.get('user_id') and database.get_user_by_id(session.get('user_id')):
+        return redirect(next_url)
 
     if request.method == 'POST':
         is_json = request.is_json
@@ -162,7 +206,7 @@ def login():
         username_or_email = data.get('username', '').strip()
         password = data.get('password', '')
         form_next = data.get('next')
-        if form_next and form_next.startswith('/'):
+        if form_next and form_next.startswith('/') and not form_next.startswith('//'):
             next_url = form_next
 
         user = database.authenticate_user(username_or_email, password)
@@ -346,6 +390,9 @@ def diagnose():
             cluster = kmeans_clustering.assign_cluster(test_list)
         except FileNotFoundError as e:
             return jsonify({'status': 'error', 'message': str(e)}), 500
+        except Exception as e:
+            app.logger.exception('K-means assignment failed')
+            return jsonify({'status': 'error', 'message': f'Diagnosis engine error: {e}'}), 500
 
         top_3 = [
             {'disease': c['condition'], 'probability': c['probability']}
@@ -924,7 +971,9 @@ def evaluation_dashboard():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    
-# TEMPORARY: Force debug mode on Render to show errors
-app.config['PROPAGATE_EXCEPTIONS'] = True
+    # Local development only. On Render the app is started by gunicorn (see Procfile).
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=os.environ.get("FLASK_DEBUG", "0") == "1",
+    )

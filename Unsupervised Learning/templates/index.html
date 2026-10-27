@@ -1548,16 +1548,20 @@ $(document).ready(function() {
                 });
             },
             error: function(xhr) {
+                // Session expired / not signed in: go to the login page instead of failing silently
+                if (xhr && xhr.status === 401) {
+                    window.location.href = (xhr.responseJSON && xhr.responseJSON.login_url) || '/login';
+                    return;
+                }
                 var errMsg = "Failed to run diagnostic evaluation.";
                 if (xhr && xhr.responseJSON && xhr.responseJSON.message) {
                     errMsg = xhr.responseJSON.message;
                 } else if (xhr && xhr.status === 0) {
                     errMsg = "Network error or server timeout. Render's free tier might be sleeping. Please wait 50 seconds and try again.";
-                } else if (xhr && xhr.responseText) {
-                    // This will grab the actual Python error from the server if it's a 500 error
-                    errMsg = "Server Error: " + xhr.responseText.substring(0, 150) + "...";
+                } else if (xhr && xhr.status) {
+                    errMsg = "Failed to run diagnostic evaluation (server returned HTTP " + xhr.status + "). Please try again in a moment.";
                 }
-                
+
                 alert(errMsg);
                 $("#result").html('<span class="text-danger font-weight-bold">' + errMsg + '</span>');
             }

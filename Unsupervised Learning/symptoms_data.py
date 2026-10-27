@@ -13,7 +13,11 @@ def get_symptoms_list():
     """Returns the exact 132 symptom feature names in model order."""
     global _SYMPTOMS_RAW
     if _SYMPTOMS_RAW is None:
-        csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'datasets', 'Training.csv')
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        # Linux (Render) is case-sensitive: the folder is 'Datasets', Windows also accepts 'datasets'
+        csv_path = os.path.join(base_dir, 'Datasets', 'Training.csv')
+        if not os.path.exists(csv_path):
+            csv_path = os.path.join(base_dir, 'datasets', 'Training.csv')
         df = pd.read_csv(csv_path, nrows=1)
         # Exclude last column 'prognosis'
         _SYMPTOMS_RAW = df.columns[:-1].tolist()
