@@ -2,6 +2,11 @@
 
 An educational research prototype that predicts potential diseases from user-selected symptoms and raises emergency triage alerts. The repository holds two versions built on the same dataset (132 binary symptoms, 41 conditions) so that supervised and unsupervised approaches can be compared.
 
+> **🔗 Live Deployments:**
+> * **Supervised Learning:** [https://disease-prediction-system-2-ix9f.onrender.com](https://disease-prediction-system-2-ix9f.onrender.com)
+> * **Unsupervised Learning:** [https://disease-prediction-system-y0ur.onrender.com](https://disease-prediction-system-y0ur.onrender.com)
+> 
+
 > **Disclaimer:** This project is for educational and research purposes only. It is **not** a substitute for professional medical diagnosis, advice, or treatment.
 
 ## 📂 Project Structure
