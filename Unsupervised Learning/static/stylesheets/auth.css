@@ -1,0 +1,285 @@
+/* ==========================================================================
+   HealthDiagnose — sign-in and registration
+   A full-screen muted-blue inquiry form: cream ink printed on blue stock,
+   thin rules, a faint paper grain, and one large editorial headline.
+   Self-contained: no Bootstrap, no icon font, no external requests.
+   ========================================================================== */
+
+:root {
+  --auth-blue:       #3F5F87;   /* paper stock */
+  --auth-blue-deep:  #34527A;   /* field focus wash */
+  --auth-ink:        #F4EEDD;   /* cream "printing ink" — 5.7:1 on stock */
+  --auth-ink-soft:   #E3EAF3;   /* secondary text — 4.9:1 on stock */
+  --auth-rule:       rgba(244, 238, 221, 0.55);
+  --auth-rule-faint: rgba(244, 238, 221, 0.28);
+  --auth-alert:      #FFE1CC;   /* error ink */
+  --auth-paper:      #F4EEDD;
+  --auth-paper-ink:  #223B5C;   /* text on cream button — 8.6:1 */
+
+  --font-display: 'Gloock', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-ui: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--auth-blue); }
+
+body.auth {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--auth-blue);
+  color: var(--auth-ink);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Paper grain: fine speckle over the whole stock (decorative, no interaction). */
+body.auth::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.42 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/></svg>");
+  background-size: 240px 240px;
+}
+
+/* Printed border, inset from the edge of the sheet. */
+.auth-frame {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: clamp(0.6rem, 1.8vw, 1.4rem);
+  display: flex;
+}
+.auth-sheet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--auth-rule);
+  padding: clamp(1rem, 2.4vw, 2rem) clamp(1.1rem, 3.4vw, 3.2rem);
+}
+
+/* ---- Form header strip: document label left, issuer right ---- */
+.auth-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--auth-rule);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.auth-strip .auth-doc-label {
+  border: 1px solid var(--auth-ink);
+  padding: 0.12rem 0.6rem;
+}
+.auth-strip .auth-issuer {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0;
+}
+
+/* ---- Body: headline left, ruled form right ---- */
+.auth-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  padding: clamp(1.8rem, 4vw, 3.4rem) 0;
+}
+
+.auth-headline h1 {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 7.4vw, 6.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.012em;
+  color: var(--auth-ink);
+  text-wrap: balance;
+}
+.auth-headline p {
+  margin: 0;
+  max-width: 30rem;
+  font-size: 1.0625rem;
+  color: var(--auth-ink-soft);
+}
+
+/* ---- Form ---- */
+.auth-form { width: 100%; max-width: 31rem; justify-self: end; }
+
+.auth-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.8rem; }
+.auth-field { grid-column: 1 / -1; margin: 0 0 1.35rem; position: relative; }
+.auth-field.half { grid-column: auto; }
+
+.auth-field label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--auth-ink-soft);
+  margin: 0;
+}
+.auth-field label .n {                /* item number, like a printed form */
+  font-variant-numeric: tabular-nums;
+  min-width: 1.1rem;
+  color: var(--auth-ink);
+  font-weight: 600;
+}
+.auth-field label .opt { font-weight: 400; opacity: 0.9; }
+.auth-field label .req { color: var(--auth-ink); font-weight: 600; }
+
+.auth-field input,
+.auth-field select {
+  display: block;
+  width: 100%;
+  margin-top: 0.15rem;
+  padding: 0.5rem 0.1rem 0.5rem 1.7rem;
+  background: transparent;
+  color: var(--auth-ink);
+  font: inherit;
+  font-size: 1.1875rem;
+  border: 0;
+  border-bottom: 1px solid var(--auth-rule);
+  border-radius: 0;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.auth-field input::placeholder { color: rgba(227, 234, 243, 0.62); }
+.auth-field input:hover,
+.auth-field select:hover { border-bottom-color: var(--auth-ink); }
+.auth-field input:focus,
+.auth-field select:focus {
+  border-bottom-color: var(--auth-ink);
+  box-shadow: 0 1px 0 0 var(--auth-ink);
+  background: var(--auth-blue-deep);
+}
+.auth-field select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none' stroke='%23F4EEDD' stroke-width='1.4'><path d='M1 1l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.3rem center;
+  padding-right: 1.6rem;
+}
+.auth-field select:invalid { color: rgba(227, 234, 243, 0.78); }
+.auth-field select option { color: #14233A; background: #F4EEDD; }
+
+/* Browser autofill would paint pale yellow: keep it on-palette. */
+.auth-field input:-webkit-autofill,
+.auth-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--auth-ink);
+  caret-color: var(--auth-ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--auth-blue-deep) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+/* Field-level validation message */
+.field-error {
+  display: none;
+  margin: 0.4rem 0 0 1.7rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--auth-alert);
+}
+.field-error::before { content: "Check: "; font-weight: 700; }
+.auth-field.invalid .field-error { display: block; }
+.auth-field.invalid input,
+.auth-field.invalid select {
+  border-bottom-color: var(--auth-alert);
+  border-bottom-style: dashed;
+}
+
+/* ---- Notices (server flashes + summary) ---- */
+.auth-notices { margin: 0 0 1.6rem; display: grid; gap: 0.6rem; }
+.auth-notice {
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--auth-rule);
+  border-left-width: 4px;
+  font-size: 0.9375rem;
+  color: var(--auth-ink);
+}
+.auth-notice.is-error {
+  border-color: var(--auth-alert);
+  color: var(--auth-alert);
+  font-weight: 500;
+}
+.auth-notice.is-error::before { content: "Could not continue. "; font-weight: 700; }
+#form-summary { display: none; }
+#form-summary.show { display: block; }
+
+/* ---- Submit ---- */
+.auth-actions { margin-top: 0.6rem; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.auth-submit {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 2.1rem;
+  background: var(--auth-paper);
+  color: var(--auth-paper-ink);
+  border: 1px solid var(--auth-paper);
+  border-radius: 0;
+  transition: background-color .15s ease, color .15s ease;
+}
+.auth-submit:hover { background: transparent; color: var(--auth-ink); }
+
+.auth-legend { font-size: 0.875rem; color: var(--auth-ink-soft); margin: 0; }
+
+.auth-switch { margin: 1.6rem 0 0; font-size: 0.9375rem; color: var(--auth-ink-soft); }
+
+a { color: var(--auth-ink); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Keyboard focus is always visible and high-contrast on the blue stock. */
+a:focus-visible,
+.auth-submit:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---- Footer line ---- */
+.auth-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--auth-rule);
+  font-size: 0.875rem;
+  color: var(--auth-ink-soft);
+}
+.auth-foot p { margin: 0; max-width: 42rem; }
+
+/* ---- Small screens: one column, headline first ---- */
+@media (max-width: 880px) {
+  .auth-main { grid-template-columns: 1fr; gap: 1.8rem; align-items: start; }
+  .auth-form { justify-self: stretch; max-width: none; }
+  .auth-headline h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+}
+@media (max-width: 480px) {
+  .auth-grid { grid-template-columns: 1fr; }
+  .auth-field.half { grid-column: 1 / -1; }
+  .auth-strip .auth-issuer { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .auth-field input, .auth-field select { border-bottom: 2px solid CanvasText; }
+  .auth-submit { border: 2px solid ButtonText; }
+}

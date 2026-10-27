@@ -1,0 +1,1838 @@
+{
+  "features": [
+    "itching",
+    "skin_rash",
+    "nodal_skin_eruptions",
+    "continuous_sneezing",
+    "shivering",
+    "chills",
+    "joint_pain",
+    "stomach_pain",
+    "acidity",
+    "ulcers_on_tongue",
+    "muscle_wasting",
+    "vomiting",
+    "burning_micturition",
+    "spotting_ urination",
+    "fatigue",
+    "weight_gain",
+    "anxiety",
+    "cold_hands_and_feets",
+    "mood_swings",
+    "weight_loss",
+    "restlessness",
+    "lethargy",
+    "patches_in_throat",
+    "irregular_sugar_level",
+    "cough",
+    "high_fever",
+    "sunken_eyes",
+    "breathlessness",
+    "sweating",
+    "dehydration",
+    "indigestion",
+    "headache",
+    "yellowish_skin",
+    "dark_urine",
+    "nausea",
+    "loss_of_appetite",
+    "pain_behind_the_eyes",
+    "back_pain",
+    "constipation",
+    "abdominal_pain",
+    "diarrhoea",
+    "mild_fever",
+    "yellow_urine",
+    "yellowing_of_eyes",
+    "acute_liver_failure",
+    "fluid_overload",
+    "swelling_of_stomach",
+    "swelled_lymph_nodes",
+    "malaise",
+    "blurred_and_distorted_vision",
+    "phlegm",
+    "throat_irritation",
+    "redness_of_eyes",
+    "sinus_pressure",
+    "runny_nose",
+    "congestion",
+    "chest_pain",
+    "weakness_in_limbs",
+    "fast_heart_rate",
+    "pain_during_bowel_movements",
+    "pain_in_anal_region",
+    "bloody_stool",
+    "irritation_in_anus",
+    "neck_pain",
+    "dizziness",
+    "cramps",
+    "bruising",
+    "obesity",
+    "swollen_legs",
+    "swollen_blood_vessels",
+    "puffy_face_and_eyes",
+    "enlarged_thyroid",
+    "brittle_nails",
+    "swollen_extremeties",
+    "excessive_hunger",
+    "extra_marital_contacts",
+    "drying_and_tingling_lips",
+    "slurred_speech",
+    "knee_pain",
+    "hip_joint_pain",
+    "muscle_weakness",
+    "stiff_neck",
+    "swelling_joints",
+    "movement_stiffness",
+    "spinning_movements",
+    "loss_of_balance",
+    "unsteadiness",
+    "weakness_of_one_body_side",
+    "loss_of_smell",
+    "bladder_discomfort",
+    "foul_smell_of urine",
+    "continuous_feel_of_urine",
+    "passage_of_gases",
+    "internal_itching",
+    "toxic_look_(typhos)",
+    "depression",
+    "irritability",
+    "muscle_pain",
+    "altered_sensorium",
+    "red_spots_over_body",
+    "belly_pain",
+    "abnormal_menstruation",
+    "dischromic _patches",
+    "watering_from_eyes",
+    "increased_appetite",
+    "polyuria",
+    "family_history",
+    "mucoid_sputum",
+    "rusty_sputum",
+    "lack_of_concentration",
+    "visual_disturbances",
+    "receiving_blood_transfusion",
+    "receiving_unsterile_injections",
+    "coma",
+    "stomach_bleeding",
+    "distention_of_abdomen",
+    "history_of_alcohol_consumption",
+    "fluid_overload.1",
+    "blood_in_sputum",
+    "prominent_veins_on_calf",
+    "palpitations",
+    "painful_walking",
+    "pus_filled_pimples",
+    "blackheads",
+    "scurring",
+    "skin_peeling",
+    "silver_like_dusting",
+    "small_dents_in_nails",
+    "inflammatory_nails",
+    "blister",
+    "red_sore_around_nose",
+    "yellow_crust_ooze"
+  ],
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "coma",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "stomach_bleeding",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9792
+        },
+        {
+          "symptom": "dark_urine",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9583
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hepatitis E",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hepatitis E",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 1,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "chest_pain",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "breathlessness",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "sweating",
+          "prevalence": 0.875
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Heart attack",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Heart attack",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 2,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "redness_of_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "congestion",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "loss_of_smell",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "muscle_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "runny_nose",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "phlegm",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "sinus_pressure",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "chest_pain",
+          "prevalence": 1.0
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Common Cold",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Common Cold",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 3,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "itching",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Chronic cholestasis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Chronic cholestasis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 4,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "headache",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "back_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "pain_behind_the_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "red_spots_over_body",
+          "prevalence": 0.9583
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Dengue",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Dengue",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 5,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "mild_fever",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "blood_in_sputum",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "swelled_lymph_nodes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "phlegm",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "malaise",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "chest_pain",
+          "prevalence": 1.0
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Tuberculosis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Tuberculosis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 6,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "depression",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "enlarged_thyroid",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "irritability",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "abnormal_menstruation",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "swollen_extremeties",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "brittle_nails",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "puffy_face_and_eyes",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "lethargy",
+          "prevalence": 0.9583
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hypothyroidism",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hypothyroidism",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 7,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "polyuria",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "increased_appetite",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "obesity",
+          "prevalence": 0.9792
+        },
+        {
+          "symptom": "irregular_sugar_level",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "restlessness",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "weight_loss",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "excessive_hunger",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Diabetes",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Diabetes",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 8,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "muscle_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "sweating",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "chills",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "diarrhoea",
+          "prevalence": 0.9167
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Malaria",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Malaria",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 9,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "stiff_neck",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "irritability",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "acidity",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "depression",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "indigestion",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "blurred_and_distorted_vision",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "excessive_hunger",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Migraine",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Migraine",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 10,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "irritability",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "muscle_weakness",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "abnormal_menstruation",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "excessive_hunger",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "diarrhoea",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "weight_loss",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "fast_heart_rate",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "mood_swings",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hyperthyroidism",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hyperthyroidism",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 11,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "neck_pain",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "dizziness",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "loss_of_balance",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "weakness_in_limbs",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "back_pain",
+          "prevalence": 0.8958
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Cervical spondylosis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Cervical spondylosis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 12,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "dischromic _patches",
+          "prevalence": 0.9271
+        },
+        {
+          "symptom": "nodal_skin_eruptions",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "itching",
+          "prevalence": 0.8958
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Fungal infection",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Fungal infection",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 13,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "malaise",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "red_spots_over_body",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "itching",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "mild_fever",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "lethargy",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Chicken pox",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Chicken pox",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 14,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "swelling_joints",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "muscle_weakness",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "painful_walking",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "movement_stiffness",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "stiff_neck",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Arthritis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Arthritis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 15,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "malaise",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "receiving_blood_transfusion",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "receiving_unsterile_injections",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "dark_urine",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "lethargy",
+          "prevalence": 0.9583
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hepatitis B",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hepatitis B",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 16,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "joint_pain",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "skin_peeling",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "small_dents_in_nails",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "silver_like_dusting",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "inflammatory_nails",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Psoriasis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Psoriasis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 17,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "excessive_hunger",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "slurred_speech",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "irritability",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "palpitations",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "sweating",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "blurred_and_distorted_vision",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hypoglycemia",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hypoglycemia",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 18,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "neck_pain",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "knee_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "hip_joint_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "swelling_joints",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "joint_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "painful_walking",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Osteoarthristis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Osteoarthristis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 19,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "continuous_sneezing",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "shivering",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "chills",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "watering_from_eyes",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Allergy",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Allergy",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 20,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "chest_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "fast_heart_rate",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "rusty_sputum",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "cough",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "chills",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "sweating",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Pneumonia",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Pneumonia",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 21,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "history_of_alcohol_consumption",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "distention_of_abdomen",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "swelling_of_stomach",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "fluid_overload.1",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Alcoholic hepatitis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Alcoholic hepatitis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 22,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "bruising",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "prominent_veins_on_calf",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "swollen_legs",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "cramps",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "obesity",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "swollen_blood_vessels",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Varicose veins",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Varicose veins",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 23,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "mild_fever",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "muscle_pain",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "joint_pain",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "hepatitis A",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "hepatitis A",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 24,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "pain_during_bowel_movements",
+          "prevalence": 0.9792
+        },
+        {
+          "symptom": "irritation_in_anus",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "bloody_stool",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "constipation",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "pain_in_anal_region",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Dimorphic hemmorhoids(piles)",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Dimorphic hemmorhoids(piles)",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 25,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "muscle_wasting",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "patches_in_throat",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "extra_marital_contacts",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "AIDS",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "AIDS",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 26,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "unsteadiness",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "loss_of_balance",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "spinning_movements",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "(vertigo) Paroymsal  Positional Vertigo",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "(vertigo) Paroymsal  Positional Vertigo",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 27,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "internal_itching",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "passage_of_gases",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "indigestion",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Peptic ulcer diseae",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Peptic ulcer diseae",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 28,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "family_history",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "breathlessness",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "mucoid_sputum",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "cough",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Bronchial Asthma",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Bronchial Asthma",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 29,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "high_fever",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "chills",
+          "prevalence": 1.0
+        },
+        {
+          "symptom": "belly_pain",
+          "prevalence": 0.9792
+        },
+        {
+          "symptom": "toxic_look_(typhos)",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "diarrhoea",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9479
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Typhoid",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Typhoid",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 30,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "weight_loss",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "itching",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "dark_urine",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Jaundice",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Jaundice",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 31,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "blister",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "yellow_crust_ooze",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "red_sore_around_nose",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "high_fever",
+          "prevalence": 0.8438
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Impetigo",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Impetigo",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 32,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "blackheads",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "scurring",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "pus_filled_pimples",
+          "prevalence": 0.8958
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Acne",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Acne",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 33,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "itching",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "stomach_pain",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "burning_micturition",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "spotting_ urination",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "skin_rash",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Drug Reaction",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Drug Reaction",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 34,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "continuous_feel_of_urine",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "bladder_discomfort",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "burning_micturition",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "foul_smell_of urine",
+          "prevalence": 0.875
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Urinary tract infection",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Urinary tract infection",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 35,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "lack_of_concentration",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "loss_of_balance",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "chest_pain",
+          "prevalence": 0.9062
+        },
+        {
+          "symptom": "dizziness",
+          "prevalence": 0.875
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hypertension",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hypertension",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 36,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "fatigue",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "family_history",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 0.9062
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hepatitis C",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hepatitis C",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 37,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "altered_sensorium",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "headache",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "weakness_of_one_body_side",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Paralysis (brain hemorrhage)",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Paralysis (brain hemorrhage)",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 38,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "chest_pain",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "cough",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "stomach_pain",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "ulcers_on_tongue",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "acidity",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.8958
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "GERD",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "GERD",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 39,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "diarrhoea",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "dehydration",
+          "prevalence": 0.9167
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.8958
+        },
+        {
+          "symptom": "sunken_eyes",
+          "prevalence": 0.8854
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Gastroenteritis",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Gastroenteritis",
+      "dominant_share": 1.0
+    },
+    {
+      "cluster_id": 40,
+      "size": 96,
+      "share": 0.0244,
+      "top_symptoms": [
+        {
+          "symptom": "joint_pain",
+          "prevalence": 0.9688
+        },
+        {
+          "symptom": "vomiting",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "yellowing_of_eyes",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "yellowish_skin",
+          "prevalence": 0.9583
+        },
+        {
+          "symptom": "loss_of_appetite",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "dark_urine",
+          "prevalence": 0.9479
+        },
+        {
+          "symptom": "abdominal_pain",
+          "prevalence": 0.9375
+        },
+        {
+          "symptom": "nausea",
+          "prevalence": 0.9375
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "Hepatitis D",
+          "share": 1.0,
+          "count": 96
+        }
+      ],
+      "dominant_condition": "Hepatitis D",
+      "dominant_share": 1.0
+    }
+  ]
+}

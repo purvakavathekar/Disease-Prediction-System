@@ -1,0 +1,11 @@
+Metric,Value,Description
+Clusters (k),41,Number of k-means clusters
+Silhouette score,0.7577,"Cohesion vs separation, -1 to 1 (higher is better)"
+Davies-Bouldin index,0.3703,Cluster overlap (lower is better)
+Inertia,1372.3,Within-cluster sum of squared distances
+Cluster purity,1.0000,Descriptive: share of records in the dominant recorded condition of their cluster
+Adjusted Rand index,1.0000,Descriptive: agreement with recorded conditions
+Normalized mutual information,1.0000,Descriptive: information shared with recorded conditions
+Smallest / largest cluster,96 / 96,Records per cluster
+Held-out assignment stability,0.9045,Same cluster before/after simulated symptom omission
+Held-out condition agreement,1.0000,Descriptive: cluster dominant condition equals recorded condition

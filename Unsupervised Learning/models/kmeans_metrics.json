@@ -1,0 +1,28 @@
+{
+  "algorithm": "KMeans (k-means++)",
+  "learning_type": "Unsupervised",
+  "n_clusters": 41,
+  "n_records": 3936,
+  "n_features": 132,
+  "inertia": 1372.33,
+  "silhouette": 0.7577,
+  "davies_bouldin": 0.3703,
+  "iterations": 2,
+  "smallest_cluster": 96,
+  "largest_cluster": 96,
+  "mean_cluster_size": 96.0,
+  "cluster_purity_vs_recorded_conditions": 1.0,
+  "adjusted_rand_index": 1.0,
+  "normalized_mutual_info": 1.0,
+  "held_out": {
+    "test_records": 984,
+    "condition_agreement_clean": 1.0,
+    "condition_agreement_noisy": 0.9045,
+    "assignment_stability_under_noise": 0.9045
+  },
+  "k_selection": "silhouette sweep",
+  "random_state": 42,
+  "dataset_source": "Training.csv",
+  "evaluated_at": "2026-10-27 06:25:00",
+  "clinical_disclaimer": "EDUCATIONAL & RESEARCH PROTOTYPE ONLY: This unsupervised clustering model has NOT been clinically validated or cleared by regulatory authorities (e.g., FDA/CE). Cluster assignments and associated conditions are intended solely for academic benchmarking and educational demonstration. In case of a medical emergency, immediately contact local emergency services."
+}

@@ -1,0 +1,53 @@
+{# Shared shell for the signed-in "case file" pages.
+   Set before including:  active (tab key), page_title, page_lede (optional), file_label (optional) #}
+<a class="ar-skip" href="#main">Skip to content</a>
+<header class="ar-topbar">
+  <a class="ar-brand" href="/">HealthDiagnose</a>
+  <div class="ar-userbar">
+    {% if current_user %}
+      <span class="ar-user">Signed in as <strong>{{ current_user.full_name or current_user.username }}</strong></span>
+      <a class="ar-signout" href="/logout">Sign out</a>
+    {% else %}
+      <a class="ar-signout" href="/login">Sign in</a>
+      <a class="ar-signout" href="/register">Register</a>
+    {% endif %}
+  </div>
+</header>
+
+<nav class="ar-tabs" aria-label="Case file sections">
+  <ul>
+    {% if current_user %}
+    <li><a class="ar-tab{{ ' is-active' if active == 'diagnose' }}" href="/"{% if active == 'diagnose' %} aria-current="page"{% endif %}>New assessment</a></li>
+    <li><a class="ar-tab{{ ' is-active' if active == 'history' }}" href="/history"{% if active == 'history' %} aria-current="page"{% endif %}>History</a></li>
+    <li><a class="ar-tab{{ ' is-active' if active == 'timeline' }}" href="/timeline"{% if active == 'timeline' %} aria-current="page"{% endif %}>Symptom timeline</a></li>
+    {% endif %}
+    <li><a class="ar-tab{{ ' is-active' if active == 'survey' }}" href="/survey"{% if active == 'survey' %} aria-current="page"{% endif %}>Survey</a></li>
+    {% if current_user %}
+    <li><a class="ar-tab{{ ' is-active' if active == 'profile' }}" href="/profile"{% if active == 'profile' %} aria-current="page"{% endif %}>Profile</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<main class="ar-sheet" id="main" tabindex="-1">
+  <div class="ar-pagehead">
+    <div>
+      <h1 class="ar-title">{{ page_title }}</h1>
+      {% if page_lede %}<p class="ar-lede">{{ page_lede }}</p>{% endif %}
+    </div>
+    {% if current_user %}
+    <div class="ar-filelabel" aria-label="File holder">
+      <span class="ar-filelabel-k">File of</span>
+      <span class="ar-filelabel-v">{{ current_user.full_name or current_user.username }}</span>
+    </div>
+    {% endif %}
+  </div>
+
+  {% set _flashes = get_flashed_messages(with_categories=true) %}
+  {% if _flashes %}
+  <div class="ar-notices">
+    {% for category, message in _flashes %}
+      {% set cat = 'danger' if category == 'error' else category %}
+      <p class="ar-notice is-{{ cat }}" role="{{ 'alert' if cat in ('danger','warning') else 'status' }}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | HealthDiagnose</title>
+    <!-- Bootstrap CSS & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    {% include '_archive_head.html' %}
+    <style>
+        .profile-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #1b3a4b 0%, #006494 100%);
+            color: white;
+            padding: 30px 24px;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+        .info-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: #6c757d;
+        }
+        .info-value {
+            font-size: 1.05rem;
+            color: #212529;
+            font-weight: 500;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="archive">
+
+    {% set active = 'profile' %}
+{% set page_title = 'Profile' %}
+{% set page_lede = 'Your account details and activity summary.' %}
+{% include '_archive_top.html' %}
+
+    <!-- Main Container -->
+    <div class="container py-4">
+        <!-- Flashed Alerts -->
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- User Profile Card -->
+                <div class="card profile-card mb-4 bg-white">
+                    <div class="profile-header text-center">
+                        <div class="profile-avatar mb-3">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">
+                            {{ user.full_name if user.full_name else user.username }}
+                        </h3>
+                        <p class="mb-0 text-white-50">
+                            <i class="fas fa-at me-1"></i> {{ user.username }}
+                        </p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                            <h5 class="fw-bold text-dark mb-0">
+                                <i class="fas fa-id-card text-primary me-2"></i> Account Details
+                            </h5>
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileCollapse" aria-expanded="false" aria-controls="editProfileCollapse">
+                                <i class="fas fa-user-edit me-1"></i> Edit Profile
+                            </button>
+                        </div>
+
+                        <!-- User Info Grid (Actual database records) -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="info-label">Full Name</div>
+                                <div class="info-value">
+                                    {% if user.full_name %}
+                                        {{ user.full_name }}
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Not provided</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="info-label">Username</div>
+                                <div class="info-value">
+                                    {{ user.username }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="info-label">Age</div>
+                                <div class="info-value">
+                                    {% if user.age %}
+                                        {{ user.age }} years old
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Not specified</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="info-label">Gender</div>
+                                <div class="info-value">
+                                    {% if user.gender %}
+                                        {{ user.gender }}
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Not specified</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="info-label">Email Address</div>
+                                <div class="info-value">
+                                    {% if user.email %}
+                                        {{ user.email }}
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Not provided</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="info-label">Member Since</div>
+                                <div class="info-value">
+                                    {% if user.created_at %}
+                                        <i class="far fa-calendar-alt text-muted me-1"></i> {{ user.created_at }}
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Not available</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Summary Stats -->
+                        <h6 class="fw-bold text-dark mb-3">
+                            <i class="fas fa-chart-pie text-primary me-2"></i> Your Health Activity Summary
+                        </h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <div class="stat-card">
+                                    <div class="display-6 fw-bold text-primary">{{ assessments_count }}</div>
+                                    <div class="text-muted small mt-1">Diagnostic Assessments</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="stat-card">
+                                    <div class="display-6 fw-bold text-info">{{ tracked_count }}</div>
+                                    <div class="text-muted small mt-1">Tracked Symptoms in Timeline</div>
+                                    <a href="/timeline" class="btn btn-sm btn-link p-0 mt-1">View Timeline &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Edit Profile Form -->
+                        <div class="collapse" id="editProfileCollapse">
+                            <div class="card card-body bg-light border p-4 mb-3">
+                                <h6 class="fw-bold text-dark mb-3">
+                                    <i class="fas fa-pen text-primary me-1"></i> Update Your Profile
+                                </h6>
+                                <form method="POST" action="/profile">
+                                    <div class="mb-3">
+                                        <label for="full_name" class="form-label small fw-bold text-muted">Full Name</label>
+                                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{ user.full_name or '' }}" placeholder="Enter your full name">
+                                    </div>
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-6">
+                                            <label for="age" class="form-label small fw-bold text-muted">Age</label>
+                                            <input type="number" class="form-control" id="age" name="age" value="{{ user.age or '' }}" placeholder="e.g. 25" min="1" max="120">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="gender" class="form-label small fw-bold text-muted">Gender</label>
+                                            <select class="form-select" id="gender" name="gender">
+                                                <option value="" {% if not user.gender %}selected{% endif %}>Select</option>
+                                                <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+                                                <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+                                                <option value="Other" {% if user.gender == 'Other' %}selected{% endif %}>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label small fw-bold text-muted">Email Address</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ user.email or '' }}" placeholder="Enter your email address">
+                                    </div>
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCollapse">Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Data Isolation & Privacy Notice -->
+                        <div class="alert alert-light border small text-muted mb-0">
+                            <i class="fas fa-shield-alt text-primary me-1"></i>
+                            <strong>Privacy & Security:</strong> Your health records and assessment timeline are private and tied exclusively to this account.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation Shortcuts -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Back to Diagnosis
+                    </a>
+                    <a href="/logout" class="btn btn-outline-danger">
+                        <i class="fas fa-sign-out-alt me-1"></i> Sign Out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    {% include '_archive_bottom.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

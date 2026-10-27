@@ -1,0 +1,309 @@
+{
+  "model_name": "Symptom K-Means Clustering",
+  "algorithm": "KMeans",
+  "framework": "scikit-learn",
+  "features": [
+    "itching",
+    "skin_rash",
+    "nodal_skin_eruptions",
+    "continuous_sneezing",
+    "shivering",
+    "chills",
+    "joint_pain",
+    "stomach_pain",
+    "acidity",
+    "ulcers_on_tongue",
+    "muscle_wasting",
+    "vomiting",
+    "burning_micturition",
+    "spotting_ urination",
+    "fatigue",
+    "weight_gain",
+    "anxiety",
+    "cold_hands_and_feets",
+    "mood_swings",
+    "weight_loss",
+    "restlessness",
+    "lethargy",
+    "patches_in_throat",
+    "irregular_sugar_level",
+    "cough",
+    "high_fever",
+    "sunken_eyes",
+    "breathlessness",
+    "sweating",
+    "dehydration",
+    "indigestion",
+    "headache",
+    "yellowish_skin",
+    "dark_urine",
+    "nausea",
+    "loss_of_appetite",
+    "pain_behind_the_eyes",
+    "back_pain",
+    "constipation",
+    "abdominal_pain",
+    "diarrhoea",
+    "mild_fever",
+    "yellow_urine",
+    "yellowing_of_eyes",
+    "acute_liver_failure",
+    "fluid_overload",
+    "swelling_of_stomach",
+    "swelled_lymph_nodes",
+    "malaise",
+    "blurred_and_distorted_vision",
+    "phlegm",
+    "throat_irritation",
+    "redness_of_eyes",
+    "sinus_pressure",
+    "runny_nose",
+    "congestion",
+    "chest_pain",
+    "weakness_in_limbs",
+    "fast_heart_rate",
+    "pain_during_bowel_movements",
+    "pain_in_anal_region",
+    "bloody_stool",
+    "irritation_in_anus",
+    "neck_pain",
+    "dizziness",
+    "cramps",
+    "bruising",
+    "obesity",
+    "swollen_legs",
+    "swollen_blood_vessels",
+    "puffy_face_and_eyes",
+    "enlarged_thyroid",
+    "brittle_nails",
+    "swollen_extremeties",
+    "excessive_hunger",
+    "extra_marital_contacts",
+    "drying_and_tingling_lips",
+    "slurred_speech",
+    "knee_pain",
+    "hip_joint_pain",
+    "muscle_weakness",
+    "stiff_neck",
+    "swelling_joints",
+    "movement_stiffness",
+    "spinning_movements",
+    "loss_of_balance",
+    "unsteadiness",
+    "weakness_of_one_body_side",
+    "loss_of_smell",
+    "bladder_discomfort",
+    "foul_smell_of urine",
+    "continuous_feel_of_urine",
+    "passage_of_gases",
+    "internal_itching",
+    "toxic_look_(typhos)",
+    "depression",
+    "irritability",
+    "muscle_pain",
+    "altered_sensorium",
+    "red_spots_over_body",
+    "belly_pain",
+    "abnormal_menstruation",
+    "dischromic _patches",
+    "watering_from_eyes",
+    "increased_appetite",
+    "polyuria",
+    "family_history",
+    "mucoid_sputum",
+    "rusty_sputum",
+    "lack_of_concentration",
+    "visual_disturbances",
+    "receiving_blood_transfusion",
+    "receiving_unsterile_injections",
+    "coma",
+    "stomach_bleeding",
+    "distention_of_abdomen",
+    "history_of_alcohol_consumption",
+    "fluid_overload.1",
+    "blood_in_sputum",
+    "prominent_veins_on_calf",
+    "palpitations",
+    "painful_walking",
+    "pus_filled_pimples",
+    "blackheads",
+    "scurring",
+    "skin_peeling",
+    "silver_like_dusting",
+    "small_dents_in_nails",
+    "inflammatory_nails",
+    "blister",
+    "red_sore_around_nose",
+    "yellow_crust_ooze"
+  ],
+  "hyperparameters": {
+    "algorithm": "lloyd",
+    "copy_x": true,
+    "init": "k-means++",
+    "max_iter": 300,
+    "n_clusters": 41,
+    "n_init": 10,
+    "random_state": 42,
+    "tol": 0.0001,
+    "verbose": 0
+  },
+  "k_sweep": [
+    {
+      "k": 30,
+      "inertia": 4243.072916666655,
+      "silhouette": 0.5908049317329057,
+      "davies_bouldin": 0.8697581190271546
+    },
+    {
+      "k": 31,
+      "inertia": 4005.4583333333517,
+      "silhouette": 0.6027495483587398,
+      "davies_bouldin": 0.879220765261129
+    },
+    {
+      "k": 32,
+      "inertia": 3686.311458333367,
+      "silhouette": 0.6271813877593672,
+      "davies_bouldin": 0.7726851665353256
+    },
+    {
+      "k": 33,
+      "inertia": 3384.1232638888964,
+      "silhouette": 0.6352266805251541,
+      "davies_bouldin": 0.8088417808724505
+    },
+    {
+      "k": 34,
+      "inertia": 3100.882812500003,
+      "silhouette": 0.6537904462364251,
+      "davies_bouldin": 0.7249619354084939
+    },
+    {
+      "k": 35,
+      "inertia": 2739.14930555556,
+      "silhouette": 0.6707013048431525,
+      "davies_bouldin": 0.7401941315952
+    },
+    {
+      "k": 36,
+      "inertia": 2513.3506944444443,
+      "silhouette": 0.685064093135557,
+      "davies_bouldin": 0.7198695257700773
+    },
+    {
+      "k": 37,
+      "inertia": 2264.1388888888805,
+      "silhouette": 0.701027134260583,
+      "davies_bouldin": 0.6903427655688996
+    },
+    {
+      "k": 38,
+      "inertia": 1996.3593749999932,
+      "silhouette": 0.7170077140438368,
+      "davies_bouldin": 0.6272123377531305
+    },
+    {
+      "k": 39,
+      "inertia": 1745.9322916666538,
+      "silhouette": 0.7311174501194626,
+      "davies_bouldin": 0.5990130801570801
+    },
+    {
+      "k": 40,
+      "inertia": 1546.817708333321,
+      "silhouette": 0.7446621669942766,
+      "davies_bouldin": 0.5171952422331421
+    },
+    {
+      "k": 41,
+      "inertia": 1372.3333333333264,
+      "silhouette": 0.7576747278133098,
+      "davies_bouldin": 0.37033189444682857
+    },
+    {
+      "k": 42,
+      "inertia": 1361.6220238095177,
+      "silhouette": 0.7548176012632738,
+      "davies_bouldin": 0.36815184999219824
+    },
+    {
+      "k": 43,
+      "inertia": 1355.5700977801162,
+      "silhouette": 0.7496709187908674,
+      "davies_bouldin": 0.36888623366640616
+    },
+    {
+      "k": 44,
+      "inertia": 1349.8832968728725,
+      "silhouette": 0.7458886434267331,
+      "davies_bouldin": 0.3701013726656663
+    },
+    {
+      "k": 45,
+      "inertia": 1334.552006472099,
+      "silhouette": 0.7417492042393872,
+      "davies_bouldin": 0.36805984927267643
+    },
+    {
+      "k": 46,
+      "inertia": 1333.5184886659672,
+      "silhouette": 0.7392113676441981,
+      "davies_bouldin": 0.44811624334236655
+    },
+    {
+      "k": 47,
+      "inertia": 1326.2950662970766,
+      "silhouette": 0.7257349702744391,
+      "davies_bouldin": 0.3865588187642573
+    },
+    {
+      "k": 48,
+      "inertia": 1316.6974018257306,
+      "silhouette": 0.7271601290794372,
+      "davies_bouldin": 0.372463070572453
+    },
+    {
+      "k": 49,
+      "inertia": 1315.5159619080127,
+      "silhouette": 0.7326571226878765,
+      "davies_bouldin": 0.37284205963450184
+    },
+    {
+      "k": 50,
+      "inertia": 1299.9275470511761,
+      "silhouette": 0.734948617736249,
+      "davies_bouldin": 0.3665733683844829
+    },
+    {
+      "k": 51,
+      "inertia": 1292.6065471406157,
+      "silhouette": 0.722093576007465,
+      "davies_bouldin": 0.3735133913667647
+    },
+    {
+      "k": 52,
+      "inertia": 1280.0173302665987,
+      "silhouette": 0.7219521029155722,
+      "davies_bouldin": 0.3720923678734916
+    },
+    {
+      "k": 53,
+      "inertia": 1277.0433729887225,
+      "silhouette": 0.7228947785458066,
+      "davies_bouldin": 0.3689367656632272
+    },
+    {
+      "k": 54,
+      "inertia": 1265.549853527937,
+      "silhouette": 0.7117891486526715,
+      "davies_bouldin": 0.48482001357134274
+    },
+    {
+      "k": 55,
+      "inertia": 1256.6055506371943,
+      "silhouette": 0.717822176294863,
+      "davies_bouldin": 0.366266135260859
+    }
+  ],
+  "clinical_notice": "EDUCATIONAL & RESEARCH PROTOTYPE ONLY: This unsupervised clustering model has NOT been clinically validated or cleared by regulatory authorities (e.g., FDA/CE). Cluster assignments and associated conditions are intended solely for academic benchmarking and educational demonstration. In case of a medical emergency, immediately contact local emergency services."
+}
