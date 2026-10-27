@@ -75,8 +75,3 @@ python src/train_and_evaluate.py   # optional: retrain
 python app.py
 ```
 
-**Run the tests** (inside either folder):
-
-```bash
-python -m unittest test_system test_triage_evaluation
-```
