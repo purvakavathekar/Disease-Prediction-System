@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | HealthDiagnose</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/auth.css') }}">
+</head>
+<body class="auth">
+<div class="auth-frame">
+  <div class="auth-sheet">
+
+    <header class="auth-strip">
+      <span class="auth-doc-label">Sign-in form</span>
+      <span class="auth-issuer">HealthDiagnose</span>
+    </header>
+
+    <main class="auth-main" id="main">
+      <section class="auth-headline" aria-labelledby="page-title">
+        <h1 id="page-title">Open your case&nbsp;file</h1>
+        <p>Sign in to see your saved assessments, your symptom timeline, and your PDF reports.</p>
+      </section>
+
+      <form class="auth-form" method="POST" action="/login" data-validate aria-labelledby="page-title">
+        {# Server messages. The route flashes the sign-in error and also passes it as `error`; show it once. #}
+        {% set flashed = get_flashed_messages(with_categories=true) %}
+        {% set shown = [] %}
+        <div class="auth-notices">
+          {% for category, message in flashed %}
+            {% if shown.append(message) %}{% endif %}
+            <p class="auth-notice {{ 'is-error' if category in ('danger', 'error') else '' }}" role="{{ 'alert' if category in ('danger', 'error') else 'status' }}">{{ message }}</p>
+          {% endfor %}
+          {% if error and error not in shown %}
+            <p class="auth-notice is-error" role="alert">{{ error }}</p>
+          {% endif %}
+          <p class="auth-notice is-error" id="form-summary" role="alert"></p>
+        </div>
+
+        <div class="auth-field">
+          <label for="username"><span class="n">1</span><span>Username or email</span></label>
+          <input type="text" id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false"
+                 placeholder="Enter your username or email" required
+                 data-label="Username or email" aria-describedby="username-error">
+          <p class="field-error" id="username-error"></p>
+        </div>
+
+        <div class="auth-field">
+          <label for="password"><span class="n">2</span><span>Password</span></label>
+          <input type="password" id="password" name="password" autocomplete="current-password"
+                 placeholder="Enter your password" required
+                 data-label="Password" aria-describedby="password-error">
+          <p class="field-error" id="password-error"></p>
+        </div>
+
+        <div class="auth-actions">
+          <button type="submit" class="auth-submit">Sign in</button>
+        </div>
+
+        <p class="auth-switch">No case file yet? <a href="/register">Create one</a></p>
+      </form>
+    </main>
+
+    <footer class="auth-foot">
+      <p>Predictions are informational and do not replace advice from a clinician.</p>
+      <p><a href="/survey">Take the health survey</a></p>
+    </footer>
+
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/auth-form.js') }}"></script>
+</body>
+</html>

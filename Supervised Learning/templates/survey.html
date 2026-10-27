@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Survey | HealthDiagnose Pro</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    {% include '_archive_head.html' %}
+</head>
+<body class="archive">
+{% set active = 'survey' %}
+{% set page_title = 'Health experience survey' %}
+{% set page_lede = '' %}
+{% include '_archive_top.html' %}
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <p class="lead">Help us improve our diagnostic system by sharing your recent health experience.</p>
+                        <hr>
+                        
+                        <h5 class="mb-3"><i class="fas fa-check-circle me-2 text-primary"></i>Please select the symptoms you faced</h5>
+                        
+                        <div class="row" id="survey-symptoms-container">
+                            <!-- Symptoms will be loaded here by JavaScript -->
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="form-group mb-4">
+                            <label for="prognosis" class="form-label"><h5><i class="fas fa-diagnoses me-2 text-primary"></i>What was your diagnosis?</h5></label>
+                            <select class="form-select" id="prognosis" name="prognosis">
+                                <option value="" disabled selected>Select your diagnosis</option>
+                                <option value="Fungal infection">Fungal infection</option>
+                                <option value="Allergy">Allergy</option>
+                                <option value="GERD">GERD</option>
+                                <option value="Chronic cholestasis">Chronic cholestasis</option>
+                                <option value="Drug Reaction">Drug Reaction</option>
+                                <option value="Peptic ulcer diseae">Peptic ulcer diseae</option>
+                                <option value="AIDS">AIDS</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Gastroenteritis">Gastroenteritis</option>
+                                <option value="Bronchial Asthma">Bronchial Asthma</option>
+                                <option value="Hypertension">Hypertension</option>
+                                <option value="Migraine">Migraine</option>
+                                <option value="Cervical spondylosis">Cervical spondylosis</option>
+                                <option value="Paralysis (brain hemorrhage)">Paralysis (brain hemorrhage)</option>
+                                <option value="Jaundice">Jaundice</option>
+                                <option value="Malaria">Malaria</option>
+                                <option value="Chicken pox">Chicken pox</option>
+                                <option value="Dengue">Dengue</option>
+                                <option value="Typhoid">Typhoid</option>
+                                <option value="hepatitis A">Hepatitis A</option>
+                                <option value="Hepatitis B">Hepatitis B</option>
+                                <option value="Hepatitis C">Hepatitis C</option>
+                                <option value="Hepatitis D">Hepatitis D</option>
+                                <option value="Hepatitis E">Hepatitis E</option>
+                                <option value="Alcoholic hepatitis">Alcoholic hepatitis</option>
+                                <option value="Tuberculosis">Tuberculosis</option>
+                                <option value="Common Cold">Common Cold</option>
+                                <option value="Pneumonia">Pneumonia</option>
+                                <option value="Dimorphic hemmorhoids(piles)">Dimorphic hemmorhoids(piles)</option>
+                                <option value="Heart attack">Heart attack</option>
+                                <option value="Varicose veins">Varicose veins</option>
+                                <option value="Hypothyroidism">Hypothyroidism</option>
+                                <option value="Hyperthyroidism">Hyperthyroidism</option>
+                                <option value="Hypoglycemia">Hypoglycemia</option>
+                                <option value="Osteoarthristis">Osteoarthristis</option>
+                                <option value="Arthritis">Arthritis</option>
+                                <option value="(vertigo) Paroymsal Positional Vertigo">Paroymsal Positional Vertigo</option>
+                                <option value="Acne">Acne</option>
+                                <option value="Urinary tract infection">Urinary tract infection</option>
+                                <option value="Psoriasis">Psoriasis</option>
+                                <option value="Impetigo">Impetigo</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="comments" class="form-label"><h5><i class="fas fa-comment me-2 text-primary"></i>Additional comments (optional)</h5></label>
+                            <textarea class="form-control" id="comments" rows="3" placeholder="Any other details about your experience..."></textarea>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <button id="survey-submit" class="btn btn-primary btn-lg px-5">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% include '_archive_bottom.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Full list of all symptoms
+            const symptoms = [
+                'Itching', 'Skin rash', 'Nodal skin eruptions', 'Continuous sneezing', 'Shivering', 
+                'Chills', 'Joint pain', 'Stomach pain', 'Acidity', 'Ulcers on tongue', 'Muscle wasting', 
+                'Vomiting', 'Burning micturition', 'Spotting urination', 'Fatigue', 'Weight gain', 
+                'Anxiety', 'Cold hands and feets', 'Mood swings', 'Weight loss', 'Restlessness', 
+                'Lethargy', 'Patches in throat', 'Irregular sugar level', 'Cough', 'High fever', 
+                'Sunken eyes', 'Breathlessness', 'Sweating', 'Dehydration', 'Indigestion', 'Headache', 
+                'Yellowish skin', 'Dark urine', 'Nausea', 'Loss of appetite', 'Pain behind the eyes', 
+                'Back pain', 'Constipation', 'Abdominal pain', 'Diarrhoea', 'Mild fever', 'Yellow urine', 
+                'Yellowing of eyes', 'Acute liver failure', 'Fluid overload', 'Swelling of stomach', 
+                'Swelled lymph nodes', 'Malaise', 'Blurred and distorted vision', 'Phlegm', 
+                'Throat irritation', 'Redness of eyes', 'Sinus pressure', 'Runny nose', 'Congestion', 
+                'Chest pain', 'Weakness in limbs', 'Fast heart rate', 'Pain during bowel movements', 
+                'Pain in anal region', 'Bloody stool', 'Irritation in anus', 'Neck pain', 'Dizziness', 
+                'Cramps', 'Bruising', 'Obesity', 'Swollen legs', 'Swollen blood vessels', 
+                'Puffy face and eyes', 'Enlarged thyroid', 'Brittle nails', 'Swollen extremeties', 
+                'Excessive hunger', 'Extra marital contacts', 'Drying and tingling lips', 'Slurred speech', 
+                'Knee pain', 'Hip joint pain', 'Muscle weakness', 'Stiff neck', 'Swelling joints', 
+                'Movement stiffness', 'Spinning movements', 'Loss of balance', 'Unsteadiness', 
+                'Weakness of one body side', 'Loss of smell', 'Bladder discomfort', 'Foul smell of urine', 
+                'Continuous feel of urine', 'Passage of gases', 'Internal itching', 'Toxic look (typhos)', 
+                'Depression', 'Irritability', 'Muscle pain', 'Altered sensorium', 'Red spots over body', 
+                'Belly pain', 'Abnormal menstruation', 'Dischromic patches', 'Watering from eyes', 
+                'Increased appetite', 'Polyuria', 'Family history', 'Mucoid sputum', 'Rusty sputum', 
+                'Lack of concentration', 'Visual disturbances', 'Receiving blood transfusion', 
+                'Receiving unsterile injections', 'Coma', 'Stomach bleeding', 'Distention of abdomen', 
+                'History of alcohol consumption', 'Fluid overload.1', 'Blood in sputum', 
+                'Prominent veins on calf', 'Palpitations', 'Painful walking', 'Pus filled pimples', 
+                'Blackheads', 'Scurring', 'Skin peeling', 'Silver like dusting', 'Small dents in nails', 
+                'Inflammatory nails', 'Blister', 'Red sore around nose', 'Yellow crust ooze'
+            ];
+
+            // Render symptoms in survey
+            function renderSurveySymptoms() {
+                const container = document.getElementById('survey-symptoms-container');
+                container.innerHTML = '';
+                
+                const rows = Math.ceil(symptoms.length / 4);
+                
+                for (let i = 0; i < rows; i++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'row g-3 mb-3';
+                    
+                    for (let j = 0; j < 4; j++) {
+                        const index = i * 4 + j;
+                        if (index >= symptoms.length) break;
+                        
+                        const colDiv = document.createElement('div');
+                        colDiv.className = 'col-md-3';
+                        
+                        colDiv.innerHTML = `
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="survey-check-${index}" value="${symptoms[index]}">
+                                <label class="form-check-label" for="survey-check-${index}">
+                                    ${symptoms[index]}
+                                </label>
+                            </div>
+                        `;
+                        
+                        rowDiv.appendChild(colDiv);
+                    }
+                    
+                    container.appendChild(rowDiv);
+                }
+            }
+
+            // Initial render
+            renderSurveySymptoms();
+
+            // Submit handler
+            document.getElementById('survey-submit').addEventListener('click', function() {
+                const selected_symp = [];
+                const list = Array(symptoms.length).fill(0);
+                
+                document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                    const id = checkbox.id.split('-')[2];
+                    const index = parseInt(id);
+                    if (index >= 0 && index < symptoms.length) {
+                        list[index] = 1;
+                        selected_symp.push(symptoms[index]);
+                    }
+                });
+                
+                const prognosis = document.getElementById('prognosis').value;
+                if (!prognosis) {
+                    alert('Please select your diagnosis');
+                    return;
+                }
+                
+                list.push(prognosis);
+                
+                // Show loading state
+                const submitBtn = document.getElementById('survey-submit');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
+                submitBtn.disabled = true;
+                
+                const insert = list.toString();
+                const insert_string = 'checkboxvalue=' + insert;
+                
+                fetch('/surveydata', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: insert_string
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data === "Successful") {
+                        window.location.href = '/thanks';
+                    } else {
+                        alert('There was an error submitting your survey. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                })
+                .finally(() => {
+                    // Reset button
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

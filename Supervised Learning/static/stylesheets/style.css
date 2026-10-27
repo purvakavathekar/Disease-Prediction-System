@@ -1,0 +1,592 @@
+/* Updated & Corrected Custom CSS */
+:root {
+    --primary-color: #4aa8c5;
+    --primary-dark: #3a8bac;
+    --light-bg: #e6f4f9;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --white: #ffffff;
+}
+
+/* ── ML Model Selector Cards ─────────────────────────────────── */
+.model-option-card {
+    border: 2px solid #dee2e6;
+    border-radius: 0.75rem;
+    padding: 1.1rem 1rem;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.model-option-card:hover {
+    border-color: #4aa8c5;
+    box-shadow: 0 4px 18px rgba(74,168,197,0.18);
+    transform: translateY(-2px);
+}
+.model-option-card.selected-model-card {
+    border-color: #4aa8c5;
+    background: #f0f9fc;
+    box-shadow: 0 0 0 3px rgba(74,168,197,0.25), 0 4px 18px rgba(74,168,197,0.15);
+}
+.model-option-card.selected-model-card::after {
+    content: '\2713';
+    position: absolute;
+    top: 0.55rem;
+    right: 0.75rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    background: #4aa8c5;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4rem;
+    text-align: center;
+}
+.model-icon-wrap {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.bg-success-light { background: #d1fae5; }
+.bg-primary-light { background: #dbeafe; }
+.bg-warning-light { background: #fef3c7; }
+/* ─────────────────────────────────────────────────────────────── */
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    background-color: var(--light-bg) !important;
+    color: var(--text-dark) !important;
+    line-height: 1.6 !important;
+}
+
+/* Navigation */
+.navbar {
+    padding: 0.7rem 0 !important;
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--white) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to right, #6dd5ed, var(--primary-color)) !important;
+    padding: 2rem 0 !important;
+    margin-bottom: 1.5rem !important;
+    color: var(--white) !important;
+}
+
+.search-container {
+    background-color: var(--white) !important;
+    border-radius: 50px !important;
+    padding: 0.5rem 1rem !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Cards */
+.card {
+    border: none !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08) !important;
+    margin-bottom: 1rem !important;
+    background-color: var(--white) !important;
+}
+
+.card-header {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-bottom: none !important;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+/* Symptoms */
+.form-check {
+    padding: 0.6rem 1rem !important;
+    margin: 0.2rem 0 !important;
+    border-radius: 0.3rem !important;
+    transition: all 0.2s !important;
+    background-color: var(--white) !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+.form-check:hover {
+    background-color: rgba(74, 168, 197, 0.08) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: var(--primary-dark) !important;
+    font-weight: 600 !important;
+}
+
+.form-check-label {
+    color: var(--text-dark) !important;
+}
+
+/* Results */
+.disease-result {
+    color: var(--primary-dark) !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+}
+
+.symptom-pill {
+    display: inline-block !important;
+    background-color: rgba(74, 168, 197, 0.15) !important;
+    color: var(--primary-dark) !important;
+    padding: 0.3rem 0.8rem !important;
+    border-radius: 50px !important;
+    margin: 0.2rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    padding: 0.6rem 1.75rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
+    color: var(--white) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+}
+
+.text-muted {
+    color: var(--text-light) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 1.5rem 0 !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    #symptoms-container {
+        max-height: 400px !important;
+        overflow-y: auto !important;
+        padding-right: 5px !important;
+    }
+
+    .form-check {
+        padding: 0.5rem !important;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ============================================================
+   NEW FEATURES: SMART FOLLOW-UP, HISTORY & TIMELINE STYLES
+   ============================================================ */
+
+/* Top Navigation Bar */
+.modern-navbar {
+    background: linear-gradient(135deg, #2b7a97 0%, #4aa8c5 100%) !important;
+    box-shadow: 0 4px 15px rgba(43, 122, 151, 0.25) !important;
+    padding: 0.8rem 1.5rem !important;
+}
+
+.modern-navbar .navbar-brand {
+    font-weight: 700 !important;
+    font-size: 1.35rem !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    letter-spacing: 0.5px !important;
+}
+
+.modern-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px !important;
+    transition: all 0.25s ease !important;
+    margin: 0 0.2rem !important;
+}
+
+.modern-navbar .nav-link:hover,
+.modern-navbar .nav-link.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Medical Disclaimer Alert */
+.medical-disclaimer {
+    background: #fff8e6 !important;
+    border-left: 4px solid #f59e0b !important;
+    color: #92400e !important;
+    padding: 0.9rem 1.2rem !important;
+    border-radius: 8px !important;
+    font-size: 0.88rem !important;
+    margin: 1.2rem 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+}
+
+.medical-disclaimer i {
+    font-size: 1.25rem !important;
+    color: #d97706 !important;
+    margin-top: 0.1rem !important;
+}
+
+/* Follow-up Questionnaire */
+.followup-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.25rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.followup-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+}
+
+.followup-question-title {
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    color: #1e293b !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.followup-help-text {
+    font-size: 0.82rem !important;
+    color: #64748b !important;
+    margin-top: 0.35rem !important;
+}
+
+/* Rating Selector Pills (Severity 1 to 5) */
+.rating-pill-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.rating-pill-group input[type="radio"] {
+    display: none !important;
+}
+
+.rating-pill-group label {
+    padding: 0.5rem 0.9rem !important;
+    border-radius: 25px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    color: #334155 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin-bottom: 0 !important;
+}
+
+.rating-pill-group label:hover {
+    border-color: #4aa8c5 !important;
+    background: #eef8fb !important;
+}
+
+.rating-pill-group input[type="radio"]:checked + label {
+    background: #4aa8c5 !important;
+    color: #ffffff !important;
+    border-color: #3a8bac !important;
+    box-shadow: 0 2px 6px rgba(74, 168, 197, 0.4) !important;
+}
+
+/* Severity Badges */
+.severity-badge {
+    padding: 0.28rem 0.65rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 0.78rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+}
+
+.severity-1 { background-color: #dcfce7 !important; color: #15803d !important; }
+.severity-2 { background-color: #ecfccb !important; color: #4d7c0f !important; }
+.severity-3 { background-color: #fef3c7 !important; color: #b45309 !important; }
+.severity-4 { background-color: #ffedd5 !important; color: #c2410c !important; }
+.severity-5 { background-color: #fee2e2 !important; color: #b91c1c !important; }
+
+/* Status Badges */
+.status-badge {
+    padding: 0.3rem 0.7rem !important;
+    border-radius: 20px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    text-transform: capitalize !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+}
+
+.status-improving {
+    background-color: #e6f9f0 !important;
+    color: #059669 !important;
+    border: 1px solid #a7f3d0 !important;
+}
+
+.status-unchanged {
+    background-color: #f3f4f6 !important;
+    color: #4b5563 !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.status-worsening {
+    background-color: #fef2f2 !important;
+    color: #dc2626 !important;
+    border: 1px solid #fecaca !important;
+}
+
+/* History Dashboard Cards */
+.history-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 1.3rem !important;
+    margin-bottom: 1.2rem !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.history-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+}
+
+.history-card-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 0.85rem !important;
+}
+
+.disease-badge {
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%) !important;
+    color: #0369a1 !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    padding: 0.4rem 0.9rem !important;
+    border-radius: 8px !important;
+    display: inline-block !important;
+}
+
+.symptom-tag {
+    display: inline-block !important;
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    font-size: 0.8rem !important;
+    padding: 0.25rem 0.65rem !important;
+    border-radius: 15px !important;
+    margin: 0.2rem !important;
+    font-weight: 500 !important;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center !important;
+    padding: 3.5rem 1.5rem !important;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 2px dashed #cbd5e1 !important;
+    margin: 2rem 0 !important;
+}
+
+.empty-state-icon {
+    font-size: 3.5rem !important;
+    color: #94a3b8 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Chart Container */
+.chart-container-card {
+    background: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+    margin-bottom: 1.5rem !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Quick Search for Symptoms */
+.symptom-search-box {
+    background: #ffffff !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 30px !important;
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.95rem !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 0 auto 1.5rem auto !important;
+    display: block !important;
+    outline: none !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+.symptom-search-box:focus {
+    border-color: #4aa8c5 !important;
+    box-shadow: 0 0 0 3px rgba(74, 168, 197, 0.25) !important;
+}
+
+.selected-counter-badge {
+    background: #4aa8c5 !important;
+    color: #ffffff !important;
+    font-size: 0.85rem !important;
+    padding: 0.35rem 0.85rem !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+    margin-bottom: 1rem !important;
+    transition: all 0.25s ease !important;
+}
+
+/* Per-symptom severity cards */
+.symptom-severity-card {
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.symptom-severity-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+/* Differential Diagnosis Probability Progress Bars */
+.diff-progress-track {
+    background-color: #e2e8f0 !important;
+    border-radius: 8px !important;
+    height: 10px !important;
+    overflow: hidden !important;
+}
+
+.diff-progress-fill {
+    height: 100% !important;
+    border-radius: 8px !important;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.diff-rank-badge {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+/* ===========================
+   Model Selector Cards
+   =========================== */
+.model-option-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    background: #fff;
+    height: 100%;
+    user-select: none;
+}
+
+.model-option-card:hover {
+    border-color: #4aa8c5;
+    box-shadow: 0 4px 14px rgba(74, 168, 197, 0.18);
+    transform: translateY(-2px);
+}
+
+.selected-model-card {
+    border-color: #4aa8c5 !important;
+    box-shadow: 0 0 0 3px rgba(74, 168, 197, 0.22), 0 4px 14px rgba(74, 168, 197, 0.12) !important;
+    background: #f0fafd !important;
+}
+
+.model-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.bg-success-light { background: #d1fae5; }
+.bg-primary-light { background: #dbeafe; }
+.bg-warning-light { background: #fef3c7; }
+
+#model-selector-card {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+

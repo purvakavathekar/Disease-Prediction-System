@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Progression Timeline | HealthDiagnose</title>
+    <!-- Bootstrap CSS, FontAwesome & Chart.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    {% include '_archive_head.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="archive">
+
+    {% set active = 'timeline' %}
+{% set page_title = 'Symptom timeline' %}
+{% set page_lede = 'Track severity and change over time for each symptom you report.' %}
+{% include '_archive_top.html' %}
+
+    <div class="container mb-5">
+        <!-- Medical Progression Disclaimer -->
+        <div class="medical-disclaimer shadow-sm">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Clinical Progression Disclaimer:</strong> This timeline is a descriptive personal tracking visualization. Fluctuations in severity scores reflect subjective tracking and do not diagnose disease progression, cure, or clinical complications. Always consult a healthcare professional for clinical decisions.
+            </div>
+        </div>
+
+        <!-- Assessment / filter context banner -->
+        <div id="assessment-context-banner" class="alert alert-primary border-0 shadow-sm d-none mb-3">
+            <i class="fas fa-link me-2"></i>
+            <span id="assessment-context-text"></span>
+            <button type="button" class="btn btn-sm btn-outline-primary ms-2" id="btn-clear-assessment-filter">Show full timeline</button>
+        </div>
+
+        <!-- Tracked symptoms from diagnosis & manual logging -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h6 class="fw-bold mb-0 text-dark">
+                    <i class="fas fa-list-check text-primary me-2"></i> Your Tracked Symptoms
+                </h6>
+                <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                    <i class="fas fa-plus me-1"></i> Add Symptom
+                </button>
+            </div>
+            <div class="card-body pt-2">
+                <p class="small text-muted mb-2">All symptoms you selected at diagnosis appear here. Filter the table/chart by one symptom, or view every record together.</p>
+                <div id="tracked-symptoms-chips" class="d-flex flex-wrap gap-2">
+                    <span class="text-muted small">Loading tracked symptoms...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Bar: Symptom Selector & Add Entry -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <label for="select-symptom-filter" class="form-label small fw-bold text-muted mb-1">
+                            <i class="fas fa-filter text-primary me-1"></i> Filter by Symptom (optional):
+                        </label>
+                        <select id="select-symptom-filter" class="form-select form-select-lg shadow-none">
+                            <option value="">-- All Tracked Symptoms (Overall Log) --</option>
+                            <!-- Populated dynamically via JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-auto">
+                        <button class="btn btn-primary btn-lg px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                            <i class="fas fa-plus-circle me-1"></i> Log Symptom Entry
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metric Indicators for Selected Symptom -->
+        <div class="row g-3 mb-4" id="symptom-stats-row">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <span class="text-muted small">Total Recorded Checkpoints</span>
+                    <h3 class="fw-bold mb-0 text-primary" id="stat-entry-count">0</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <span class="text-muted small">Latest Reported Severity</span>
+                    <h3 class="fw-bold mb-0 text-dark" id="stat-latest-sev">N/A</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <span class="text-muted small">Observed Trend Status</span>
+                    <h4 class="fw-semibold mb-0" id="stat-trend">Steady</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progression Chart Card -->
+        <div class="chart-container-card" id="chart-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0 text-dark" id="chart-title">
+                    <i class="fas fa-wave-square text-primary me-2"></i> Severity Progression Over Time
+                </h5>
+                <span class="badge bg-light text-secondary border" id="chart-symptom-badge">All Symptoms</span>
+            </div>
+            <div style="position: relative; height: 350px; width: 100%;">
+                <canvas id="progressionChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Chronological Table of Entries -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0 text-dark">
+                    <i class="fas fa-history text-primary me-2"></i> Chronological Timeline Records
+                </h5>
+                <span class="badge bg-primary rounded-pill" id="table-count-badge">0 entries</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="timeline-table">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" style="min-width: 150px;">Date & Time</th>
+                            <th scope="col">Symptom</th>
+                            <th scope="col">Severity (1-5)</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Notes & Assessment Context</th>
+                            <th scope="col" class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timeline-tbody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state shadow-sm d-none">
+            <div class="empty-state-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h4 class="fw-bold text-dark">No Timeline Entries Found</h4>
+            <p class="text-muted mb-4">No progression data is available for this symptom yet. Record your first symptom checkpoint to start visualizing severity changes.</p>
+            <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                <i class="fas fa-plus me-1"></i> Log Symptom Entry
+            </button>
+        </div>
+    </div>
+
+    <!-- Log Symptom Entry Modal -->
+    {% include '_archive_bottom.html' %}
+<div class="modal fade" id="addEntryModal" tabindex="-1" aria-labelledby="addEntryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold" id="addEntryModalLabel">
+                        <i class="fas fa-plus-circle me-2"></i> Log Symptom Progression Entry
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="add-entry-form">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="entry-symptom" class="form-label fw-bold small text-muted">Symptom <span class="text-danger">*</span></label>
+                            <select id="entry-symptom" class="form-select" required>
+                                <option value="" disabled selected>-- Choose Symptom --</option>
+                                <!-- Populated by JS -->
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="entry-timestamp" class="form-label fw-bold small text-muted">Date & Time <span class="text-danger">*</span></label>
+                            <input type="datetime-local" id="entry-timestamp" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted d-block">Severity Level (1 to 5) <span class="text-danger">*</span></label>
+                            <div class="rating-pill-group">
+                                <input type="radio" name="severity_radio" id="sev1" value="1">
+                                <label for="sev1">1 - Minimal</label>
+
+                                <input type="radio" name="severity_radio" id="sev2" value="2">
+                                <label for="sev2">2 - Mild</label>
+
+                                <input type="radio" name="severity_radio" id="sev3" value="3" checked>
+                                <label for="sev3">3 - Moderate</label>
+
+                                <input type="radio" name="severity_radio" id="sev4" value="4">
+                                <label for="sev4">4 - Severe</label>
+
+                                <input type="radio" name="severity_radio" id="sev5" value="5">
+                                <label for="sev5">5 - Incapacitating</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <label for="entry-status" class="form-label fw-bold small text-muted">Progression Status</label>
+                                <select id="entry-status" class="form-select">
+                                    <option value="improving">Improving</option>
+                                    <option value="unchanged" selected>Unchanged / Stable</option>
+                                    <option value="worsening">Worsening</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="entry-duration" class="form-label fw-bold small text-muted">Duration (e.g. 3 days)</label>
+                                <input type="text" id="entry-duration" class="form-control" placeholder="e.g. 2 days, 1 week">
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="entry-notes" class="form-label fw-bold small text-muted">Optional Notes / Context</label>
+                            <textarea id="entry-notes" class="form-control" rows="2" placeholder="e.g. Started warm compress, felt worse in the morning..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save-entry">
+                            <i class="fas fa-save me-1"></i> Save Entry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let allSymptoms = [];
+        let timelineEntries = [];
+        let chartInstance = null;
+        let addEntryModalInstance = null;
+        let activeAssessmentFilter = '';
+        let urlParams = new URLSearchParams(window.location.search);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            addEntryModalInstance = new bootstrap.Modal(document.getElementById('addEntryModal'));
+
+            // Initialize default datetime in modal to current local time
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('entry-timestamp').value = now.toISOString().slice(0, 16);
+
+            activeAssessmentFilter = urlParams.get('assessment') || urlParams.get('assessment_id') || '';
+            const presetSymptom = urlParams.get('symptom') || '';
+
+            if (activeAssessmentFilter) {
+                showAssessmentBanner(activeAssessmentFilter);
+            }
+
+            document.getElementById('btn-clear-assessment-filter').addEventListener('click', function() {
+                activeAssessmentFilter = '';
+                urlParams.delete('assessment');
+                urlParams.delete('assessment_id');
+                window.history.replaceState({}, '', '/timeline' + (urlParams.toString() ? '?' + urlParams.toString() : ''));
+                document.getElementById('assessment-context-banner').classList.add('d-none');
+                refreshTimelineView();
+            });
+
+            loadSymptomsList(presetSymptom);
+
+            // Handle filter change
+            document.getElementById('select-symptom-filter').addEventListener('change', function() {
+                refreshTimelineView();
+            });
+
+            // Handle form submission
+            document.getElementById('add-entry-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveTimelineEntry();
+            });
+        });
+
+        function showAssessmentBanner(assessmentId) {
+            const banner = document.getElementById('assessment-context-banner');
+            const text = document.getElementById('assessment-context-text');
+            text.textContent = `Showing all symptoms recorded for diagnosis ${assessmentId}.`;
+            banner.classList.remove('d-none');
+        }
+
+        function refreshTimelineView() {
+            const symptomFilter = document.getElementById('select-symptom-filter').value;
+            loadTimelineEntries(symptomFilter, activeAssessmentFilter);
+        }
+
+        function loadSymptomsList(presetSymptom) {
+            // Load ALL 132 symptoms for the "Add New Entry" modal select only
+            fetch('/api/symptoms')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        allSymptoms = data.symptoms;
+                        populateEntrySymptomSelect(presetSymptom);
+                    }
+                })
+                .catch(err => console.error('Error loading symptoms:', err));
+
+            // Load the user's actually-tracked symptoms to populate the filter dropdown
+            loadTrackedSymptomsFilter(presetSymptom);
+        }
+
+        function renderTrackedSymptomsChips(trackedList, presetSymptom) {
+            const container = document.getElementById('tracked-symptoms-chips');
+            if (!trackedList || trackedList.length === 0) {
+                container.innerHTML = '<span class="text-muted small">No symptoms tracked yet. Complete a diagnosis or use <strong>Add Symptom</strong> to log one.</span>';
+                return;
+            }
+
+            let html = '';
+            trackedList.forEach(s => {
+                const name = s.symptom_name;
+                const isActive = presetSymptom && presetSymptom.toLowerCase() === name.toLowerCase();
+                html += `
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn ${isActive ? 'btn-primary' : 'btn-outline-primary'} tracked-symptom-chip" data-symptom="${escapeHtml(name)}" title="Filter timeline to this symptom">
+                            ${escapeHtml(name)} <span class="badge bg-light text-dark ms-1">${s.count}</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" onclick="deleteTrackedSymptom('${escapeHtml(name).replace(/'/g, "\\'")}')" title="Remove all timeline records for this symptom">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+            container.querySelectorAll('.tracked-symptom-chip').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sym = this.getAttribute('data-symptom');
+                    document.getElementById('select-symptom-filter').value = sym;
+                    refreshTimelineView();
+                });
+            });
+        }
+
+        function loadTrackedSymptomsFilter(presetSymptom) {
+            fetch('/api/timeline/tracked-symptoms')
+                .then(res => res.json())
+                .then(data => {
+                    const filterSelect = document.getElementById('select-symptom-filter');
+                    filterSelect.innerHTML = '<option value="">-- All Tracked Symptoms (Overall Log) --</option>';
+
+                    const tracked = (data.status === 'success' && data.tracked_symptoms) ? data.tracked_symptoms : [];
+
+                    tracked.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.symptom_name;
+                        opt.textContent = `${s.symptom_name} (${s.count} entries, avg severity ${parseFloat(s.avg_severity).toFixed(1)})`;
+                        if (presetSymptom && presetSymptom.toLowerCase() === s.symptom_name.toLowerCase()) {
+                            opt.selected = true;
+                        }
+                        filterSelect.appendChild(opt);
+                    });
+
+                    renderTrackedSymptomsChips(tracked, presetSymptom || filterSelect.value);
+                    refreshTimelineView();
+                })
+                .catch(err => console.error('Error loading tracked symptoms:', err));
+        }
+
+        function populateEntrySymptomSelect(presetSymptom) {
+            // Populates the ADD-ENTRY modal dropdown with all 132 symptoms
+            const entrySelect = document.getElementById('entry-symptom');
+            entrySelect.innerHTML = '<option value="" disabled selected>-- Choose Symptom --</option>';
+            allSymptoms.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.display_name;
+                opt.textContent = s.display_name;
+                entrySelect.appendChild(opt);
+            });
+            if (presetSymptom) {
+                entrySelect.value = presetSymptom;
+            }
+        }
+
+
+        function loadTimelineEntries(selectedSymptom, assessmentId) {
+            const params = new URLSearchParams();
+            if (selectedSymptom) {
+                params.append('symptom', selectedSymptom);
+            }
+            if (assessmentId) {
+                params.append('assessment_id', assessmentId);
+            }
+
+            fetch(`/api/timeline?${params.toString()}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        timelineEntries = data.entries;
+                        const chartLabel = assessmentId
+                            ? `Assessment ${assessmentId}`
+                            : (selectedSymptom || 'All Symptoms');
+                        renderTimeline(timelineEntries, chartLabel);
+                    }
+                })
+                .catch(err => console.error('Error loading timeline:', err));
+        }
+
+        function renderTimeline(entries, selectedSymptom) {
+            const emptyState = document.getElementById('empty-state');
+            const chartSection = document.getElementById('chart-section');
+            const tbody = document.getElementById('timeline-tbody');
+            const tableBadge = document.getElementById('table-count-badge');
+            const chartBadge = document.getElementById('chart-symptom-badge');
+            const statCount = document.getElementById('stat-entry-count');
+            const statLatestSev = document.getElementById('stat-latest-sev');
+            const statTrend = document.getElementById('stat-trend');
+
+            tableBadge.textContent = `${entries.length} entries`;
+            chartBadge.textContent = selectedSymptom || 'All Symptoms';
+            statCount.textContent = entries.length;
+
+            if (entries.length === 0) {
+                emptyState.classList.remove('d-none');
+                chartSection.classList.add('d-none');
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">No records found.</td></tr>';
+                statLatestSev.textContent = 'N/A';
+                statTrend.textContent = 'None';
+                statTrend.className = 'fw-semibold mb-0 text-muted';
+                if (chartInstance) {
+                    chartInstance.destroy();
+                    chartInstance = null;
+                }
+                return;
+            }
+
+            emptyState.classList.add('d-none');
+            chartSection.classList.remove('d-none');
+
+            // Compute Stats
+            const latestEntry = entries[entries.length - 1]; // chronologically last
+            statLatestSev.innerHTML = `<span class="severity-badge severity-${latestEntry.severity}">Level ${latestEntry.severity}/5</span>`;
+
+            const latestStatus = (latestEntry.progress_status || 'unchanged').toLowerCase();
+            if (latestStatus.includes('improving')) {
+                statTrend.textContent = 'Improving';
+                statTrend.className = 'fw-semibold mb-0 text-success';
+            } else if (latestStatus.includes('worsening')) {
+                statTrend.textContent = 'Escalating / Worsening';
+                statTrend.className = 'fw-semibold mb-0 text-danger';
+            } else {
+                statTrend.textContent = 'Stable / Unchanged';
+                statTrend.className = 'fw-semibold mb-0 text-secondary';
+            }
+
+            // Render Chart
+            renderChart(entries, selectedSymptom);
+
+            // Render Table (Chronological reverse for latest-first viewing in table)
+            const reversedEntries = [...entries].reverse();
+            let tableHtml = '';
+
+            reversedEntries.forEach(entry => {
+                const progClass = (entry.progress_status || '').toLowerCase().includes('improving') ? 'status-improving' :
+                                  (entry.progress_status || '').toLowerCase().includes('worsening') ? 'status-worsening' : 'status-unchanged';
+
+                tableHtml += `
+                    <tr>
+                        <td class="fw-medium text-dark"><i class="far fa-calendar-alt text-muted me-1"></i> ${escapeHtml(entry.timestamp)}</td>
+                        <td><span class="badge bg-light text-dark border px-2 py-1">${escapeHtml(entry.symptom_name)}</span></td>
+                        <td><span class="severity-badge severity-${entry.severity}">Severity ${entry.severity}/5</span></td>
+                        <td><span class="status-badge ${progClass}">${escapeHtml(entry.progress_status || 'unchanged')}</span></td>
+                        <td class="text-muted small">${escapeHtml(entry.duration || '-')}</td>
+                        <td>
+                            <div class="small">${escapeHtml(entry.notes || '-')}</div>
+                            ${entry.assessment_id ? `<span class="badge bg-light text-secondary border mt-1" title="Linked Assessment"><i class="fas fa-link me-1"></i>${escapeHtml(entry.assessment_id)}</span>` : ''}
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteEntry(${entry.id})" title="Delete this entry">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = tableHtml;
+        }
+
+        function renderChart(entries, selectedSymptom) {
+            const ctx = document.getElementById('progressionChart').getContext('2d');
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const labels = entries.map(e => e.timestamp);
+            const dataPoints = entries.map(e => e.severity);
+            const pointBackgroundColors = entries.map(e => {
+                const status = (e.progress_status || '').toLowerCase();
+                if (status.includes('improving')) return '#235C35'; // green
+                if (status.includes('worsening')) return '#9B1C24'; // red
+                return '#7A4E00'; // amber/unchanged
+            });
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: selectedSymptom ? `${selectedSymptom} Severity` : 'Recorded Severity',
+                        data: dataPoints,
+                        borderColor: '#1F4A85',
+                        backgroundColor: 'rgba(31, 74, 133, 0.10)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: pointBackgroundColors,
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const entry = entries[context.dataIndex];
+                                    const sevMap = {1: '1 - Very Mild', 2: '2 - Mild', 3: '3 - Moderate', 4: '4 - Severe', 5: '5 - Incapacitating'};
+                                    return [
+                                        `Symptom: ${entry.symptom_name}`,
+                                        `Severity: ${sevMap[entry.severity] || entry.severity}`,
+                                        `Status: ${entry.progress_status || 'unchanged'}`,
+                                        entry.duration ? `Duration: ${entry.duration}` : null,
+                                        entry.notes ? `Note: ${entry.notes}` : null
+                                    ].filter(Boolean);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 1,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(val) {
+                                    const labels = {1: '1 - Very Mild', 2: '2 - Mild', 3: '3 - Moderate', 4: '4 - Severe', 5: '5 - Incapacitating'};
+                                    return labels[val] || val;
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Self-Reported Severity Rating'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Assessment Checkpoint Date & Time'
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function saveTimelineEntry() {
+            const symptom = document.getElementById('entry-symptom').value;
+            const timestamp = document.getElementById('entry-timestamp').value;
+            const severityRadio = document.querySelector('input[name="severity_radio"]:checked');
+            const severity = severityRadio ? severityRadio.value : 3;
+            const status = document.getElementById('entry-status').value;
+            const duration = document.getElementById('entry-duration').value.trim();
+            const notes = document.getElementById('entry-notes').value.trim();
+
+            if (!symptom) {
+                alert('Please select a symptom.');
+                return;
+            }
+
+            const payload = {
+                symptom_name: symptom,
+                timestamp: timestamp,
+                severity: parseInt(severity),
+                progress_status: status,
+                duration: duration,
+                notes: notes
+            };
+
+            const submitBtn = document.getElementById('btn-save-entry');
+            const origText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Saving...';
+            submitBtn.disabled = true;
+
+            fetch('/api/timeline', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                submitBtn.innerHTML = origText;
+                submitBtn.disabled = false;
+                if (data.status === 'success') {
+                    addEntryModalInstance.hide();
+                    document.getElementById('add-entry-form').reset();
+                    const now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('entry-timestamp').value = now.toISOString().slice(0, 16);
+                    // Clear the assessment-scoped filter so manually-added entries
+                    // (which have no assessment_id) appear alongside diagnosis entries.
+                    activeAssessmentFilter = '';
+                    urlParams.delete('assessment');
+                    urlParams.delete('assessment_id');
+                    window.history.replaceState({}, '', '/timeline');
+                    document.getElementById('assessment-context-banner').classList.add('d-none');
+                    // Also reset symptom filter to show all tracked symptoms.
+                    document.getElementById('select-symptom-filter').value = '';
+                    loadTrackedSymptomsFilter('');
+                } else {
+                    alert('Error adding entry: ' + data.message);
+                }
+            })
+            .catch(err => {
+                submitBtn.innerHTML = origText;
+                submitBtn.disabled = false;
+                alert('Submission error: ' + err);
+            });
+        }
+
+        function deleteEntry(entryId) {
+            if (!confirm('Are you sure you want to delete this progression entry?')) {
+                return;
+            }
+
+            fetch(`/api/timeline/${entryId}/delete`, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Keep the current filter so the user stays in context
+                        // (unless they deleted the last entry for that symptom,
+                        //  in which case loadTrackedSymptomsFilter will clean up)
+                        const currentFilter = document.getElementById('select-symptom-filter').value;
+                        loadTrackedSymptomsFilter(currentFilter);
+                    } else {
+                        alert('Could not delete entry: ' + data.message);
+                    }
+                })
+                .catch(err => alert('Delete error: ' + err));
+        }
+
+        function deleteTrackedSymptom(symptomName) {
+            if (!confirm(`Remove ALL timeline records for "${symptomName}"? This cannot be undone.`)) {
+                return;
+            }
+
+            fetch('/api/timeline/symptom/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ symptom_name: symptomName })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Reset filter to "all" so remaining symptoms are still visible
+                    document.getElementById('select-symptom-filter').value = '';
+                    loadTrackedSymptomsFilter('');
+                } else {
+                    alert('Could not remove symptom: ' + data.message);
+                }
+            })
+            .catch(err => alert('Delete error: ' + err));
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>

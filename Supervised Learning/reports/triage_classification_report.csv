@@ -1,0 +1,42 @@
+disease_class,precision,recall,f1_score,support,is_emergency_category
+(vertigo) Paroymsal  Positional Vertigo,0.8846,0.9583,0.92,24,False
+AIDS,0.75,0.875,0.8077,24,False
+Acne,0.8636,0.7917,0.8261,24,False
+Alcoholic hepatitis,0.9565,0.9167,0.9362,24,True
+Allergy,1.0,0.9583,0.9787,24,False
+Arthritis,0.7742,1.0,0.8727,24,False
+Bronchial Asthma,0.88,0.9167,0.898,24,True
+Cervical spondylosis,0.8889,1.0,0.9412,24,False
+Chicken pox,0.95,0.7917,0.8636,24,False
+Chronic cholestasis,0.85,0.7083,0.7727,24,False
+Common Cold,0.9565,0.9167,0.9362,24,False
+Dengue,0.9545,0.875,0.913,24,True
+Diabetes ,0.9091,0.8333,0.8696,24,False
+Dimorphic hemmorhoids(piles),0.8462,0.9167,0.88,24,False
+Drug Reaction,0.913,0.875,0.8936,24,False
+Fungal infection,0.7059,1.0,0.8276,24,False
+GERD,0.8846,0.9583,0.92,24,False
+Gastroenteritis,0.7407,0.8333,0.7843,24,False
+Heart attack,0.76,0.7917,0.7755,24,True
+Hepatitis B,0.9565,0.9167,0.9362,24,False
+Hepatitis C,0.8846,0.9583,0.92,24,False
+Hepatitis D,0.7619,0.6667,0.7111,24,False
+Hepatitis E,0.9091,0.8333,0.8696,24,False
+Hypertension ,0.9565,0.9167,0.9362,24,True
+Hyperthyroidism,1.0,0.7917,0.8837,24,False
+Hypoglycemia,0.9167,0.9167,0.9167,24,True
+Hypothyroidism,1.0,0.9583,0.9787,24,False
+Impetigo,0.8333,0.8333,0.8333,24,False
+Jaundice,0.913,0.875,0.8936,24,False
+Malaria,0.7917,0.7917,0.7917,24,False
+Migraine,0.9583,0.9583,0.9583,24,False
+Osteoarthristis,1.0,0.9583,0.9787,24,False
+Paralysis (brain hemorrhage),0.75,0.625,0.6818,24,True
+Peptic ulcer diseae,0.7778,0.875,0.8235,24,False
+Pneumonia,0.8846,0.9583,0.92,24,True
+Psoriasis,0.9231,1.0,0.96,24,False
+Tuberculosis,0.9565,0.9167,0.9362,24,False
+Typhoid,0.9524,0.8333,0.8889,24,False
+Urinary tract infection,0.8696,0.8333,0.8511,24,False
+Varicose veins,0.8889,1.0,0.9412,24,False
+hepatitis A,1.0,0.7917,0.8837,24,False

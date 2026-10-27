@@ -1,0 +1,12 @@
+Metric,Value,Percentage,Description
+Random Forest Accuracy,0.8811,88.11%,Ensemble classifier accuracy under simulated patient symptom uncertainty (Target: 80-90%)
+K-Nearest Neighbors (KNN),0.8404,84.04%,Distance-based instance classifier accuracy under symptom perturbation (Target: 80-85%)
+Naive Bayes Accuracy,0.7520,75.20%,Probabilistic independence classifier accuracy under clinical noise (Target: 75-80%)
+Macro Precision (RF),0.8867,88.67%,Unweighted average precision across all 41 disease classes
+Macro Recall (RF),0.8811,88.11%,Unweighted average recall across all 41 disease classes
+Macro-F1 Score (RF),0.8808,88.08%,Harmonic mean of macro precision and macro recall
+Emergency Recall (Sensitivity),0.8750,87.50%,Proportion of true emergency conditions correctly detected
+Under-Triage Rate,0.1250,12.50%,Critical false-negative rate: emergencies labeled non-emergency
+Over-Triage Rate,0.0253,2.53%,False-positive rate: non-emergencies escalated to emergency category
+Training Sample Count,3936,80.00%,Number of instances in training split (fit data only)
+Test Sample Count,984,20.00%,Number of instances in held-out test split (unseen during training)

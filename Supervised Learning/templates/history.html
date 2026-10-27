@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment History | Disease Diagnoser</title>
+    <!-- Bootstrap CSS & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    {% include '_archive_head.html' %}
+</head>
+<body class="archive">
+
+    {% set active = 'history' %}
+{% set page_title = 'Assessment history' %}
+{% set page_lede = 'Review your saved assessments, symptoms, and follow-up answers.' %}
+{% include '_archive_top.html' %}
+
+    <div class="container mb-5">
+        <!-- Medical Disclaimer -->
+        <div class="medical-disclaimer shadow-sm">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Medical Information Notice:</strong> Stored assessments reflect model-based predictions and contextual questionnaire responses recorded at the time of assessment. These records are intended for personal tracking and informational review only and do not constitute official clinical medical records.
+            </div>
+        </div>
+
+        <!-- Dashboard Action Bar & Summary Stats -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-3 bg-light text-primary me-3">
+                            <i class="fas fa-notes-medical fa-2x"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted small">Total Assessments</span>
+                            <h3 class="mb-0 fw-bold" id="stat-total">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-3 bg-light text-success me-3">
+                            <i class="fas fa-calendar-check fa-2x"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted small">Latest Record</span>
+                            <h5 class="mb-0 fw-semibold text-truncate" id="stat-latest">None</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-3 d-flex flex-column justify-content-center">
+                    <div class="d-flex gap-2">
+                        <a href="/" class="btn btn-primary flex-fill">
+                            <i class="fas fa-plus me-1"></i> New Assessment
+                        </a>
+                        <button class="btn btn-outline-danger" id="btn-clear-all" title="Clear all history">
+                            <i class="fas fa-trash-alt me-1"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <form id="filter-form" class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label class="form-label small fw-bold text-muted" for="filter-search">Search by Disease or Symptom</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                            <input type="text" id="filter-search" class="form-control border-start-0" placeholder="e.g. Fungal, Itching, Cough...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold text-muted" for="filter-start-date">From Date</label>
+                        <input type="date" id="filter-start-date" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold text-muted" for="filter-end-date">To Date</label>
+                        <input type="date" id="filter-end-date" class="form-control">
+                    </div>
+                    <div class="col-md-1 d-flex gap-2">
+                        <button type="button" id="btn-reset-filter" class="btn btn-light w-100" title="Reset Filters">
+                            <i class="fas fa-redo text-muted"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-muted mt-2">Loading assessment records...</p>
+        </div>
+
+        <!-- Assessments Container -->
+        <div id="assessments-list"></div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state shadow-sm d-none">
+            <div class="empty-state-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h4 class="fw-bold text-dark">No Assessment History Found</h4>
+            <p class="text-muted mb-4">You have not saved any diagnostic assessments yet or no records match your filter criteria.</p>
+            <a href="/" class="btn btn-primary px-4">
+                <i class="fas fa-stethoscope me-1"></i> Start a New Assessment
+            </a>
+        </div>
+
+        <!-- Privacy & Storage Disclaimer Footer -->
+        <div class="text-center text-muted small mt-5 pt-3 border-top">
+            <p class="mb-1"><i class="fas fa-shield-alt me-1 text-primary"></i> <strong>Data Isolation & Storage:</strong> Assessments are stored in a local SQLite database instance. Records remain within this local deployment.</p>
+        </div>
+    </div>
+
+{% include '_archive_bottom.html' %}
+    <!-- Assessment Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel">
+                        <i class="fas fa-file-medical me-2"></i> Assessment Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modal-detail-content">
+                    <!-- Dynamic details populated by JavaScript -->
+                </div>
+                <div class="modal-footer bg-light d-flex justify-content-between">
+                    <a href="#" class="btn btn-outline-danger" id="modal-btn-pdf" target="_blank">
+                        <i class="fas fa-file-pdf me-1"></i> Download Clinical Report (PDF)
+                    </a>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                        <a href="/timeline" class="btn btn-primary" id="modal-btn-timeline">
+                            <i class="fas fa-chart-line me-1"></i> View in Timeline
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear All Confirmation Modal -->
+    <div class="modal fade" id="clearAllModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-exclamation-triangle me-2"></i> Confirm Clear All</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <p class="lead mb-2">Are you sure you want to delete all saved assessment history?</p>
+                    <p class="text-muted small">This action cannot be undone. All stored assessment records and progression timeline entries will be permanently removed.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirm-clear-btn">
+                        <i class="fas fa-trash me-1"></i> Yes, Delete All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentAssessments = [];
+        let detailModalInstance = null;
+        let clearAllModalInstance = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            detailModalInstance = new bootstrap.Modal(document.getElementById('detailModal'));
+            clearAllModalInstance = new bootstrap.Modal(document.getElementById('clearAllModal'));
+
+            loadAssessments();
+
+            // Search and filter listeners
+            document.getElementById('filter-search').addEventListener('input', debounce(loadAssessments, 350));
+            document.getElementById('filter-start-date').addEventListener('change', loadAssessments);
+            document.getElementById('filter-end-date').addEventListener('change', loadAssessments);
+            document.getElementById('btn-reset-filter').addEventListener('click', function() {
+                document.getElementById('filter-search').value = '';
+                document.getElementById('filter-start-date').value = '';
+                document.getElementById('filter-end-date').value = '';
+                loadAssessments();
+            });
+
+            // Clear All Handler
+            document.getElementById('btn-clear-all').addEventListener('click', function() {
+                clearAllModalInstance.show();
+            });
+
+            document.getElementById('confirm-clear-btn').addEventListener('click', function() {
+                fetch('/api/assessments/clear', { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        clearAllModalInstance.hide();
+                        loadAssessments();
+                    })
+                    .catch(err => {
+                        alert('Error clearing history: ' + err);
+                    });
+            });
+        });
+
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function loadAssessments() {
+            const search = document.getElementById('filter-search').value.trim();
+            const startDate = document.getElementById('filter-start-date').value;
+            const endDate = document.getElementById('filter-end-date').value;
+
+            const params = new URLSearchParams();
+            if (search) params.append('search', search);
+            if (startDate) params.append('start_date', startDate);
+            if (endDate) params.append('end_date', endDate);
+
+            document.getElementById('loading-spinner').classList.remove('d-none');
+            document.getElementById('assessments-list').innerHTML = '';
+            document.getElementById('empty-state').classList.add('d-none');
+
+            fetch(`/api/assessments?${params.toString()}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('loading-spinner').classList.add('d-none');
+                    if (data.status === 'success') {
+                        currentAssessments = data.assessments;
+                        renderAssessments(currentAssessments);
+                        updateStats(currentAssessments);
+                    } else {
+                        alert('Failed to load history: ' + (data.message || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('loading-spinner').classList.add('d-none');
+                    console.error('Fetch error:', err);
+                });
+        }
+
+        function updateStats(items) {
+            document.getElementById('stat-total').textContent = items.length;
+            if (items.length > 0) {
+                const latestDate = items[0].timestamp || 'N/A';
+                document.getElementById('stat-latest').textContent = latestDate;
+            } else {
+                document.getElementById('stat-latest').textContent = 'None';
+            }
+        }
+
+        function renderAssessments(items) {
+            const container = document.getElementById('assessments-list');
+            const emptyState = document.getElementById('empty-state');
+
+            if (!items || items.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('d-none');
+                return;
+            }
+
+            emptyState.classList.add('d-none');
+            let html = '';
+
+            items.forEach(item => {
+                const followUp = item.follow_up || {};
+                const severity = followUp.severity || null;
+                const progression = followUp.progression || null;
+                const duration = followUp.duration || null;
+                const symptoms = item.symptoms || [];
+
+                let severityBadge = '';
+                if (severity) {
+                    const sevNum = parseInt(String(severity).charAt(0)) || 3;
+                    severityBadge = `<span class="severity-badge severity-${sevNum}"><i class="fas fa-tachometer-alt"></i> Severity ${sevNum}/5</span>`;
+                }
+
+                let progressionBadge = '';
+                if (progression) {
+                    const progClass = progression.toLowerCase().includes('improving') ? 'status-improving' :
+                                      progression.toLowerCase().includes('worsening') ? 'status-worsening' : 'status-unchanged';
+                    progressionBadge = `<span class="status-badge ${progClass}"><i class="fas fa-chart-line"></i> ${escapeHtml(progression)}</span>`;
+                }
+
+                // Render first 6 symptoms as pills
+                const visibleSymptoms = symptoms.slice(0, 6);
+                const extraCount = symptoms.length - 6;
+                const pillsHtml = visibleSymptoms.map(s => `<span class="symptom-tag">${escapeHtml(s)}</span>`).join('') +
+                                  (extraCount > 0 ? `<span class="badge bg-secondary rounded-pill align-middle">+${extraCount} more</span>` : '');
+
+                html += `
+                    <div class="history-card">
+                        <div class="history-card-header">
+                            <div>
+                                <span class="badge bg-light text-secondary border me-2">${escapeHtml(item.id)}</span>
+                                <span class="text-muted small"><i class="far fa-clock me-1"></i>${escapeHtml(item.timestamp)}</span>
+                                <div class="mt-2">
+                                    <span class="disease-badge">
+                                        <i class="fas fa-stethoscope me-1 text-primary"></i> ${escapeHtml(item.predicted_disease)}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteAssessment('${escapeHtml(item.id)}')" title="Delete this record">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-2">
+                            <div class="col-md-7">
+                                <div class="small text-muted mb-1">
+                                    <strong>Patient:</strong> ${escapeHtml(item.patient_name || 'Anonymous')}
+                                    ${item.patient_age ? ` &bull; Age: ${escapeHtml(item.patient_age)}` : ''}
+                                    ${item.patient_gender && item.patient_gender !== 'Not Specified' ? ` &bull; ${escapeHtml(item.patient_gender)}` : ''}
+                                </div>
+                                <div class="mt-1">${pillsHtml}</div>
+                            </div>
+                            <div class="col-md-5 text-md-end mt-2 mt-md-0">
+                                <div class="d-flex flex-wrap justify-content-md-end gap-1 mb-2">
+                                    ${severityBadge}
+                                    ${progressionBadge}
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('${escapeHtml(item.id)}')">
+                                        <i class="fas fa-eye me-1"></i> Details
+                                    </button>
+                                    <a href="/api/assessment/${encodeURIComponent(item.id)}/pdf" class="btn btn-sm btn-outline-danger" target="_blank" title="Download PDF Report">
+                                        <i class="fas fa-file-pdf me-1"></i> PDF
+                                    </a>
+                                    <a href="/timeline?assessment=${encodeURIComponent(item.id)}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-chart-line me-1"></i> Timeline
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function viewDetails(assessmentId) {
+            const item = currentAssessments.find(a => a.id === assessmentId);
+            if (!item) return;
+
+            const modalContent = document.getElementById('modal-detail-content');
+            const symptoms = item.symptoms || [];
+            const followUp = item.follow_up || {};
+
+            let followUpRows = '';
+            if (Object.keys(followUp).length > 0) {
+                for (const [key, val] of Object.entries(followUp)) {
+                    if (val) {
+                        const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        followUpRows += `
+                            <tr>
+                                <th class="text-muted" style="width: 35%">${escapeHtml(label)}</th>
+                                <td class="fw-medium">${escapeHtml(String(val))}</td>
+                            </tr>
+                        `;
+                    }
+                }
+            } else {
+                followUpRows = '<tr><td colspan="2" class="text-muted fst-italic">No follow-up questions answered for this assessment.</td></tr>';
+            }
+
+            const symptomsPills = symptoms.map(s => `<span class="symptom-tag bg-light text-dark border px-2 py-1">${escapeHtml(s)}</span>`).join(' ');
+
+            modalContent.innerHTML = `
+                <div class="mb-4 text-center">
+                    <span class="badge bg-light text-secondary border mb-2">${escapeHtml(item.id)}</span>
+                    <h3 class="fw-bold text-primary mb-1">${escapeHtml(item.predicted_disease)}</h3>
+                    <div class="text-muted small"><i class="far fa-calendar-alt me-1"></i> ${escapeHtml(item.timestamp)}</div>
+                </div>
+
+                <div class="card mb-3 border-0 bg-light">
+                    <div class="card-body py-2 px-3">
+                        <div class="row text-center">
+                            <div class="col-4 border-end">
+                                <span class="text-muted small">Name</span>
+                                <div class="fw-bold text-truncate">${escapeHtml(item.patient_name || 'Anonymous')}</div>
+                            </div>
+                            <div class="col-4 border-end">
+                                <span class="text-muted small">Age</span>
+                                <div class="fw-bold">${escapeHtml(item.patient_age || 'N/A')}</div>
+                            </div>
+                            <div class="col-4">
+                                <span class="text-muted small">Gender</span>
+                                <div class="fw-bold">${escapeHtml(item.patient_gender || 'N/A')}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About This Prediction Section -->
+                <div class="card mb-3 border bg-white p-3 shadow-sm rounded" id="modal-about-card">
+                    <h6 class="fw-bold text-dark mb-2">
+                        <i class="fas fa-info-circle text-primary me-2"></i> About This Prediction
+                    </h6>
+                    <div class="mb-1 small">
+                        <strong class="text-secondary">Predicted condition:</strong>
+                        <span class="fw-bold text-primary ms-1">${escapeHtml(item.predicted_disease)}</span>
+                    </div>
+                    <div class="mb-1 small">
+                        <strong class="text-secondary">Selected symptoms:</strong>
+                        <span class="text-dark ms-1">${escapeHtml(symptoms.join(', ') || 'None recorded')}</span>
+                    </div>
+                    <div class="mb-2 small">
+                        <strong class="text-secondary">Explanation:</strong>
+                        <span class="text-muted ms-1" id="modal-about-explanation">The model generated this prediction by evaluating the submitted symptom pattern against patterns in its training data.</span>
+                    </div>
+                    <div class="alert alert-light border mb-0 py-2 px-3 small text-muted">
+                        <strong>Disclaimer:</strong> This result is for informational and educational purposes only. It cannot confirm or rule out a medical condition. Consult a qualified healthcare professional for medical advice.
+                    </div>
+                    <div id="modal-alternatives-container" class="mt-2 pt-1 border-top small text-muted d-none">
+                        <strong>Alternative model considerations:</strong> <span id="modal-alternatives-text"></span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold text-dark border-bottom pb-2">
+                        <i class="fas fa-check-square text-primary me-2"></i> Selected Symptoms (${symptoms.length})
+                    </h6>
+                    <div class="d-flex flex-wrap gap-1 mt-2">
+                        ${symptomsPills || '<span class="text-muted">No symptoms recorded</span>'}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="fw-bold text-dark border-bottom pb-2">
+                        <i class="fas fa-comments text-primary me-2"></i> Follow-Up Questionnaire Responses
+                    </h6>
+                    <table class="table table-sm table-bordered mt-2">
+                        <tbody>
+                            ${followUpRows}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert alert-warning py-2 px-3 small mb-0">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    Follow-up questionnaire details provide contextual tracking and personal progression monitoring. They do not alter the underlying model's predictions.
+                </div>
+            `;
+
+            const timelineBtn = document.getElementById('modal-btn-timeline');
+            if (symptoms.length > 0) {
+                timelineBtn.href = `/timeline?assessment=${encodeURIComponent(item.id)}`;
+            } else {
+                timelineBtn.href = '/timeline';
+            }
+
+            const pdfBtn = document.getElementById('modal-btn-pdf');
+            if (pdfBtn) {
+                pdfBtn.href = `/api/assessment/${encodeURIComponent(item.id)}/pdf`;
+            }
+
+            // Fetch clean About This Prediction context
+            fetch(`/api/assessment/${encodeURIComponent(item.id)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success' && data.assessment && data.assessment.explainability) {
+                        const xai = data.assessment.explainability;
+                        if (xai.explanation) {
+                            document.getElementById('modal-about-explanation').textContent = xai.explanation;
+                        }
+                        if (xai.alternative_conditions && xai.alternative_conditions.length > 0) {
+                            document.getElementById('modal-alternatives-text').textContent = xai.alternative_conditions.join(', ');
+                            document.getElementById('modal-alternatives-container').classList.remove('d-none');
+                        } else {
+                            document.getElementById('modal-alternatives-container').classList.add('d-none');
+                        }
+                    }
+                })
+                .catch(() => {});
+
+            detailModalInstance.show();
+        }
+
+        function deleteAssessment(assessmentId) {
+            if (!confirm(`Are you sure you want to delete assessment ${assessmentId}?`)) {
+                return;
+            }
+
+            fetch(`/api/assessment/${encodeURIComponent(assessmentId)}/delete`, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        loadAssessments();
+                    } else {
+                        alert('Could not delete assessment: ' + data.message);
+                    }
+                })
+                .catch(err => alert('Error deleting: ' + err));
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>

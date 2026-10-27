@@ -1,0 +1,30 @@
+{
+  "test_accuracy": 0.8811,
+  "macro_precision": 0.8867,
+  "macro_recall": 0.8811,
+  "macro_f1": 0.8808,
+  "emergency_recall": 0.875,
+  "under_triage_rate": 0.125,
+  "over_triage_rate": 0.0253,
+  "emergency_true_positives": 168,
+  "emergency_false_negatives": 24,
+  "emergency_false_positives": 20,
+  "emergency_true_negatives": 772,
+  "train_records": 3936,
+  "test_records": 984,
+  "total_records": 4920,
+  "random_state": 42,
+  "test_split_ratio": 0.2,
+  "stratified": true,
+  "n_features": 132,
+  "n_classes": 41,
+  "model_type": "RandomForestClassifier",
+  "evaluated_at": "2026-10-24 21:27:09",
+  "clinical_disclaimer": "EDUCATIONAL & RESEARCH PROTOTYPE ONLY: This machine learning model has NOT been clinically validated or cleared by regulatory authorities (e.g., FDA/CE). Predictions and triage classifications are intended solely for academic benchmarking and educational demonstration. In case of a medical emergency, immediately contact local emergency services.",
+  "evaluation_methodology": "Simulated Clinical Noise & Symptom Dropout (Realistic Robustness Benchmark)",
+  "model_accuracies": {
+    "random_forest": 88.11,
+    "knn": 84.04,
+    "naive_bayes": 75.2
+  }
+}
